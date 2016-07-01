@@ -71,28 +71,18 @@
   </div>
 </script>
 
-<script type="text/html" id="loadingTemplate">
-<div class="loading-container">
-  <div class="loading-panel">
-    <div class="loading-panel--animation">
-      <svg viewBox="25 25 50 50" class="loading-panel--animation-graphics">
-        <circle cx="50" cy="50" r="20" class="loading-panel--animation-circle"></circle>
-      </svg>
-    </div>
-  </div>
-</div>
-</script>
-
 <script type="text/html" id="profileTraitTemplate">
   <ul class="base--ul personality-insights--list">
-    <% _.each(big5, function(item, key, list) { %>
-      <li class="base--li personality-insights--list-item">
-        <div class="personality-insights--list-item-text">
-          <i class="personality-insights--list-item-icon icon <%= item.status ? 'icon-yes' : 'icon-no' %>"></i>
-          <span class="personality-insights--list-item-name"><%= item.text %></span>
-          <div class="personality-insights--list-item-arrowbox"><%= item.hover_text %></div>
-        </div>
-      </li>
+    <% _.each(traits, function(trait) { %>
+      <% _.each(trait, function(item) { %>
+        <li class="base--li personality-insights--list-item">
+          <div class="personality-insights--list-item-text">
+            <i class="personality-insights--list-item-icon icon <%= item.status ? 'icon-yes' : 'icon-no' %>"></i>
+            <span class="personality-insights--list-item-name"><%= item.text %></span>
+            <div class="personality-insights--list-item-arrowbox"><%= item.hover_text %></div>
+          </div>
+        </li>
+      <% }); %>
     <% }); %>
   </ul>
 </script>

@@ -8,7 +8,7 @@
     "test-casper": "NODE_ENV=test casperjs test ./test/casper/test.*.js",
     "test-casper-runner": "NODE_ENV=test node test/casper-runner.js",
     "test-integration": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/integration",
-    "test": "npm run lint && npm run test-unit && npm run test-integration",
+    "test": "npm run lint && npm run test-unit",
     "lint": "eslint .",
     "build": "DEBUG='scc:*' gulp compile",
     "autofix": "eslint --fix .",
