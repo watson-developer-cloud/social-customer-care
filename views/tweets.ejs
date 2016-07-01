@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Social Customer Care</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- top level heading -->
+  <header class="_demo--heading">
+    <a href="/" class="wordmark">
+      <span class="wordmark--left"><img class="header--avatar-icon" src="images/watson-avatar-white.png" alt="Watson Avatar"></span>
+      <span class="wordmark--right" style='text-decoration: none;'>Social Customer Care</span>
+    </a>
+    <nav role="menubar" class="heading-nav">
+      <li role="presentation" class="base--li heading-nav--li">
+        <a href="https://www.ibm.com/developerworks/community/" role="menuitem" class="heading-nav--item">Community</a>
+      </li>
+      <li role="presentation" class="base--li heading-nav--li">
+        <a href="https://github.ibm.com/watson-developer-cloud/social-customer-care/" role="menuitem" class="heading-nav--item">Fork on GitHub</a>
+      </li>
+    </nav>
+  </header>
+
+  <!-- Body -->
+  <div class="_loading js-loading-screen">
+    <div class="loading-container">
+      <div class="loading-panel">
+        <p class="loading-panel--description base--p">Analyzing and classifying all the tweets...</p>
+        <div class="loading-panel--animation">
+          <svg viewBox="25 25 50 50" class="loading-panel--animation-graphics">
+            <circle cx="50" cy="50" r="20" class="loading-panel--animation-circle"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="_app">
+    <div class="filters-container">
+      <div class="filters"></div>
+    </div>
+    <div class="tweets-container">
+      <div class="tweets"></div>
+    </div>
+    <div class="personality-insights-container">
+      <div class="personality-insights-container--cancel js-cancel-pi">
+        <i class="icon-x icon personality-insights-container--cancel-icon"></i>
+      </div>
+      <div class="personality-insights">
+        <h4 class="base--h4 personality-insights--header">Account</h4>
+        <div class="personality-insights--group personality-insights--group_account">
+          <div class="personality-insights--avatar">
+            <img src="images/default-avatar.png" alt="" class="personality-insights--avatar-image">
+          </div>
+          <div class="personality-insights--twitter-profile">
+            <div class="personality-insights--username">John Brady</div>
+            <div class="personality-insights--handle">@dizzleforizzle</div>
+            <div class="personality-insights--followers"><span class="personality-insights--followers-count">1337</span> Followers</div>
+          </div>
+        </div>
+        <div class="personality-insights--group open">
+          <div class="personality-insights--drop-down-header">
+            <div class="personality-insights--drop-down-header-title">Personality characteristics</div>
+          </div>
+          <div class="personality-insights--drop-down-content js-personality-characteristics"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+  <$ include ./underscore-templates/underscore-templates.ejs $>
+
+  <script type="text/javascript" src="js/demo.js"></script>
+</body>
+
+</html>

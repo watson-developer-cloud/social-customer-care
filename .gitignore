@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.env.js
+coverage
+npm-debug.log
+public/css
+public/fonts
+public/js
+.idea/**
+.jshint*

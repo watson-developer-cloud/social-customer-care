@@ -1,0 +1,641 @@
+$container-width-x-large: 860px;
+$container-width-large: get('large');
+@mixin visibility-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+@mixin visibility-show {
+  visibility: visible;
+  opacity: 1;
+}
+.header--avatar-icon {
+  top: 9px;
+  margin: 0 0rem -10px 0;
+  width: 100%;
+  height: auto;
+}
+.auth-panel {
+  width: 100%;
+  max-width: 32rem;
+  margin: get('rhythm') auto 0;
+  text-align: center;
+  &--header {
+    font-weight: 100;
+    font-size: 4.5em;
+    color: white;
+  }
+  &--description {
+    color: white;
+    font-weight: 300;
+    font-size: 1.5em;
+  }
+  &--input-container {
+    width: 100%;
+  }
+  &--text-input {
+    @include grid(6);
+    margin-top: 0;
+    background: inherit;
+    border: none;
+    border-bottom: 1px solid white;
+    text-align: center;
+    padding: get('rhythm') / 4;
+    font-size: 1em;
+    font-weight: 300;
+    color: white;
+    &:focus {
+      outline-color: white;
+    }
+    &::placeholder {
+      color: #c3e5f9;
+    }
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+  }
+  &--auth-button {
+    display: inline-block;
+    padding: get('rhythm') / 10 get('rhythm') * 4;
+    border: 2px solid white;
+    color: white;
+    font-size: ms(2);
+    font-weight: 300;
+    text-decoration: none;
+    margin-top: get('rhythm') * 2;
+    transition: 0.2s;
+    min-width: 100px;
+    text-align: center;
+    border-radius: 2rem;
+    cursor: pointer;
+    &:hover {
+      background: #fff;
+      color: get('primary color');
+    }
+    &:focus {
+      background: #fff;
+      color: get('primary color');
+      outline-color: white;
+    }
+  }
+}
+.footer-links {
+  text-align: center;
+  font-size: ms(-2);
+  color: white;
+  margin-top: 7rem;
+  &--link {
+    text-decoration: none;
+    color: white;
+    &:visited {
+      color: white;
+    }
+    &:hover {
+      color: darken(white, 10%);
+    }
+    &:focus {
+      color: darken(white, 10%);
+      outline-color: white;
+    }
+    .footer-links--row-2 & {
+      margin-right: get('rhythm') / 4;
+    }
+  }
+  &--separator {
+    margin: get('rhythm') / 8;
+  }
+  &--row-1 {
+    margin-top: 0;
+  }
+  &--row-2 {
+    margin-top: get('rhythm') / 8;
+  }
+}
+._loading {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  background-color: get('background color');
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+  z-index: 500;
+
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 0rem;
+}
+
+.loading-panel {
+  display: block;
+  width: 20rem;
+  margin: 0rem auto;
+
+  &--description {
+    color: white;
+    text-align: center;
+  }
+
+  &--animation {
+    width: 5rem;
+    height: 5rem;
+    margin: get('rhythm') * 2 auto 0rem;
+    display: block;
+  }
+
+  &--animation-graphics {
+    height: 100%;
+    width: 100%;
+    -webkit-transform: translateZ(0) rotate(300deg);
+    transform: translateZ(0) rotate(300deg);
+    -webkit-transform-origin: 25px 25px;
+    transform-origin: 25px 25px;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation: b 4s ease-out infinite;
+    animation: b 4s ease-out infinite;
+  }
+
+  &--animation-circle {
+    stroke-dasharray: 125px;
+    stroke-dashoffset: 9.7px;
+    r: 20px;
+    cx: 50px;
+    cy: 50px;
+    fill: transparent;
+    stroke: white;
+    stroke-width: 4.65116px;
+    stroke-linecap: butt;
+    -webkit-transition: stroke-dashoffset 1s cubic-bezier(.5,.08,0,1);
+    transition: stroke-dashoffset 1s cubic-bezier(.5,.08,0,1);
+    -webkit-animation: a 4s ease-out infinite;
+    animation: a 4s ease-out infinite;
+  }
+}
+
+@-webkit-keyframes a {
+  0% {
+    stroke-dashoffset: 9.7px;
+  }
+  60% {
+    stroke-dashoffset: 113.52px;
+  }
+  to {
+    stroke-dashoffset: 9.7px;
+  }
+}
+@keyframes a {
+  0% {
+    stroke-dashoffset: 9.7px;
+  }
+  60% {
+    stroke-dashoffset: 113.52px;
+  }
+  to {
+    stroke-dashoffset: 9.7px;
+  }
+}
+@-webkit-keyframes b {
+  0% {
+    -webkit-transform: rotate(300deg);
+    transform: rotate(300deg);
+  }
+  60% {
+    -webkit-transform: rotate(1320deg);
+    transform: rotate(1320deg);
+  }
+  to {
+    -webkit-transform: rotate(2100deg);
+    transform: rotate(2100deg);
+  }
+}
+@keyframes b {
+  0% {
+    -webkit-transform: rotate(300deg);
+    transform: rotate(300deg);
+  }
+  60% {
+    -webkit-transform: rotate(1320deg);
+    transform: rotate(1320deg);
+  }
+  to {
+    -webkit-transform: rotate(2100deg);
+    transform: rotate(2100deg);
+  }
+}
+
+._app {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  margin-top: 0rem;
+}
+
+$top-nav-height: 4.75rem;
+
+@mixin app-panel {
+  margin-top: 0rem;
+  height: 100%;
+  padding-top: $top-nav-height;
+  overflow: auto;
+}
+
+.filters-container {
+  @include app-panel;
+  @include grid(3, $wrap-gutter-right: true, $has-right-gutter: false);
+  background-color: get('primary color');
+}
+
+.tweets-container {
+  @include app-panel;
+  @include grid(9, $has-right-gutter: false);
+  background-color: white;
+}
+
+.personality-insights-container {
+  @include app-panel;
+  @include grid(3, $wrap-gutter-right: true, $has-right-gutter: false);
+  background-color: get('primary color');
+  position: fixed;
+  top: 0rem;
+  left: 0rem;
+  transition: 0.2s;
+  transform: translateX(-21rem);
+  visibility: hidden;
+  overflow: auto;
+
+  &.show {
+    transform: translateX(0rem);
+    visibility: visible;
+  }
+
+  &--cancel {
+    display: inline-block;
+    position: absolute;
+    top: get('rhythm') / 4 + $top-nav-height;
+    right: get('rhythm') / 2;
+    color: white;
+    cursor: pointer;
+  }
+
+  &--cancel-icon {
+    font-size: 0.7em;
+  }
+}
+
+@mixin rounded-tag {
+  margin-top: 0rem;
+  color: get('black');
+  background-color: get('secondary color');
+  border-radius: 2rem;
+}
+@mixin rounded-tag--selected {
+  background-color: get('primary color');
+  color: white;
+}
+
+.filters {
+  padding: get('rhythm') 0rem get('rhythm') get('rhythm');
+  color: white;
+
+  &--group {
+    margin-top: get('rhythm') / 4;
+  }
+
+  &--header {
+    color: white;
+    border-bottom: 1px solid white;
+    font-weight: 300;
+  }
+
+  &--radio {
+    display: none;
+  }
+
+  &--label {
+    position: relative;
+    padding: get('rhythm') / 8 get('rhythm') / 2 get('rhythm') / 8 get('rhythm') / 2;
+    margin: 0rem;
+    transition: 0.2s;
+    border-top-left-radius: get('rhythm');
+    border-bottom-left-radius: get('rhythm');
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    font-weight: 300;
+    font-size: ms(0);
+
+    .base--radio + &:before {
+      display: none;
+    }
+
+    .filters--radio:checked + & {
+      background-color: white;
+      color: get('black');
+      transition: 0s;
+    }
+  }
+
+  &--label-text {
+    flex-grow: 2;
+    text-align: left;
+  }
+
+  &--label-counter {
+    @include rounded-tag;
+    width: 3rem;
+    text-align: center;
+    font-weight: 400;
+
+    .filters--radio:checked + .filters--label & {
+      @include rounded-tag--selected;
+    }
+  }
+}
+
+.personality-insights {
+  margin-top: 0rem;
+  padding: get('rhythm') 0rem get('rhythm') get('rhythm');
+  color: white;
+  font-weight: 300;
+
+  &--group {
+    margin-top: get('rhythm') / 4;
+    border-top: 1px solid white;
+
+    &_account {
+      display: flex;
+      align-items: center;
+      padding: get('rhythm') / 2 0rem;
+    }
+  }
+
+  &--avatar {
+    margin-right: get('rhythm') / 2;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+  }
+  &--avatar-image {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    right: -9999px;
+    bottom: -9999px;
+    margin: auto;
+  }
+
+  &--twitter-profile {
+    flex-grow: 2;
+    margin-top: 0rem;
+  }
+
+  &--username {
+    margin-top: 0rem;
+    line-height: 1.2;
+  }
+  &--handle {
+    margin-top: 0rem;
+    line-height: 1.2;
+  }
+  &--followers {
+    margin-top: 0rem;
+    line-height: 1.2;
+  }
+
+  &--header {
+    color: white;
+    font-weight: 300;
+  }
+
+  &--drop-down-header {
+    display: flex;
+    align-items: center;
+    padding: get('rhythm') / 4 0rem;
+  }
+
+  &--drop-down-header-title {
+    flex-grow: 2;
+  }
+
+  &--drop-down-header-arrow-container {
+    margin-top: 0rem;
+    padding: 0rem get('rhythm') / 2;
+  }
+
+  &--drop-down-header-arrow {
+    transition: 0.2s;
+    display: inline-block;
+    font-size: 0.5em;
+    vertical-align: middle;
+
+    .personality-insights--group.open & {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &--drop-down-content {
+    visibility: hidden;
+    transition: 0.2s;
+    height: 0rem;
+    margin-top: 0rem;
+    padding: 0rem;
+
+    .personality-insights--group.open & {
+      visibility: visible;
+      height: auto;
+      padding: 1rem 0rem 1.5rem;
+    }
+  }
+  &--list {
+    width: 100%;
+  }
+
+  &--list-item {
+    &.base--li:before {
+      display: none;
+    }
+  }
+
+  &--list-item-icon {
+    margin-right: get('rhythm') / 4;
+    vertical-align: middle;
+  }
+
+  &--list-item-text {
+    position: relative;
+  }
+
+  &--list-item-arrowbox {
+    position: absolute;
+    margin-top: 0rem;
+    bottom: calc(100% + #{get('rhythm') / 2});
+    left: calc(50% - 11rem);
+    position: absolute;
+    background-color: darken(get('primary color'), 10%);
+    padding: 1rem;
+    width: 15rem;
+    padding: get('rhythm') / 2;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.1s;
+
+    &:before {
+      position: absolute;
+      top: 100%;
+      left: calc(50% - 0.5rem);
+      border: 0.5rem solid transparent;
+      border-top-color: darken(get('primary color'), 10%);
+    }
+
+    .personality-insights--list-item-text:hover & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.tweets {
+  height: 100%;
+  width: 100%;
+
+  &--no-tweets {
+    max-width: 25rem;
+    margin: auto;
+    text-align: center;
+    margin-top: get('rhythm') * 1.5;
+    color: #333;
+  }
+
+  &--row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 0rem;
+    overflow: hidden;
+  }
+}
+
+@mixin tweet-column {
+  margin-top: 0rem;
+  padding: get('rhythm');
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-weight: 300;
+  min-height: 100%;
+
+  &--avatar {
+    margin-right: get('rhythm') / 2;
+  }
+  &--avatar-image-container {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #ddd;
+  }
+  &--avatar-image {
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+  &--tweet {
+    margin-top: 0rem;
+  }
+  &--username {
+    font-weight: 800;
+    color: get('primary color');
+    margin-right: get('rhythm') / 8;
+  }
+  &--message {
+    line-height: 1.25;
+    margin-top: get('rhythm') / 8;
+  }
+}
+
+.tweet {
+  @include grid(6, $has-right-gutter: false);
+  @include tweet-column;
+  background-color: white;
+  position: relative;
+  padding-right: get('rhythm') * 1.5;
+
+  transition: 0.2s;
+  cursor: pointer;
+
+  &.selected {
+    background-color: #eee9f3;
+
+    .base--a:focus,
+    .base--a:hover {
+      color: #a98fc3;
+    }
+  }
+
+  &--sentiment {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    top: get('rhythm');
+    right: get('rhythm') * 3 / 4;
+    margin-top: 0rem;
+  }
+  &--sentiment-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+.watson-tweet {
+  @include grid(6, $has-right-gutter: false, $wrap-gutter-right: true);
+  @include tweet-column;
+  background-color: #f3fafe;
+
+  &--metadata {
+    // display: flex;
+  }
+
+  &--tags {
+    flex-grow: 2;
+  }
+
+  &--tag {
+    @include rounded-tag;
+    padding: 0rem get('rhythm') / 3;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  &--confidence-score {
+    margin-top: get('rhythm') / 8;
+    min-width: 8.2em;
+  }
+
+  &--avatar-image-container {
+    background-color: transparent;
+  }
+}

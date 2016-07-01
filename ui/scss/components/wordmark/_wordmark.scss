@@ -1,0 +1,35 @@
+.wordmark {
+	cursor: pointer;
+	margin-top: get('rhythm') * 0.75;
+	margin-left: get('rhythm') / 2;
+	margin-bottom: get('rhythm') / 4;
+	display: inline-block;
+	font-size: 1.062em;
+	text-decoration: none;
+
+	&--left {
+		color: #fdfdfd;
+		font-weight: 300;
+		vertical-align: middle;
+		display: inline-block;
+		width: 2.5rem;
+		text-align: center;
+    margin-top: -0.55rem;
+	}
+
+	&--right {
+		color: #ffffff;
+		font-weight: 500;
+		vertical-align: middle;
+	}
+
+	@include breakpoint(get('heading nav inline breakpoint')) {
+		margin-bottom: get('rhythm') * 0.75;
+		margin-left: get('rhythm') * 1.5;
+		float: left;
+	}
+
+	@include breakpoint(768px) {
+
+	}
+}

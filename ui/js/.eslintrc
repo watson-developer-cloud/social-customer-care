@@ -1,0 +1,10 @@
+{
+  "global" : {
+    "_": true
+  },
+  "env": {
+    "jquery": true,
+    "browser": true,
+  },
+  "extends": "../../.eslintrc",
+}

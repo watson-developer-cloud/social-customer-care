@@ -1,0 +1,19 @@
+declared-services:
+  natural-language-classifier-service:
+    label: natural_language_classifier
+    plan: standard
+  personality-insights-service:
+    label: personality_insights
+    plan: tiered
+  tone-analyzer-standard:
+    label: tone_analyzer
+    plan: standard
+applications:
+- services:
+   - natural-language-classifier-service
+   - personality-insights-service
+   - tone-analyzer-standard
+  name: social-customer-care
+  command: npm start
+  path: .
+  memory: 512M

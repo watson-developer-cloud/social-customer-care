@@ -1,0 +1,17 @@
+{
+  "account_suspension": "For help with suspended accounts please visit https://support.twitter.com/articles/15790",
+  "account_verification": "Account verification establishes the authenticity of identities. More information can be found at https://support.twitter.com/articles/119135.",
+  "account": "General account help can be found at https://support.twitter.com/categories/282.",
+  "DM": "There is a lot of help on direct messages available at https://support.twitter.com/articles/14606.",
+  "featurerequest": "Thanks for the feature request. We'll pass this along.",
+  "follow": "We'll send your question about following to an expert.",
+  "general": "Passing this along to one of our customer service specialists.",
+  "spam/fraud": "To report spam please go to the spam account's profile and choose \"report\" under the gear icon.",
+  "mobile": "Mobile Twitter is a great way to keep in touch. Check out the basics at https://support.twitter.com/categories/281",
+  "notifications": "Both mobile and web notifications can be managed under settings. Go to twitter.com, click on the profile icon, and select settings.",
+  "photos": "This is a complex topic, we'll pass this along to a specialist that will get back to you.",
+  "playercard": "Information on the Player Card can be found at https://dev.twitter.com/cards/types/player.",
+  "profile": "Profiles are a complex topic, we'll pass this question along to a specialist.",
+  "tweets": "We're going to have to send this one to a specialist for help.",
+  "userhandle": "We do not generally accept requests for usernames that seem inactive."
+}

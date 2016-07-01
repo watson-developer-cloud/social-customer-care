@@ -1,0 +1,9 @@
+$ColorScheme: (
+  'primary color': #5f93ce,
+  'secondary color': #c3e5f9,
+  'background color': #5f93ce,
+  'white': #fff,
+  'black': #333
+);
+
+$GlobalSettings: map-merge($GlobalSettings, $ColorScheme);

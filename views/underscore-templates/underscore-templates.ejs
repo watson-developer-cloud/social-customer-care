@@ -1,0 +1,97 @@
+<script type="text/html" id="tweetsTemplate">
+  <div class="tweets--row customer-sentiment-<%= sentiment_index %> support-topics-<%= class_name_index %>">
+    <div class="tweet">
+      <div class="tweet--avatar">
+        <div class="tweet--avatar-image-container">
+          <img src="<%= message.tweet.user.profile_image_url_https %>" alt="" class="tweet--avatar-image">
+        </div>
+      </div>
+      <div class="tweet--tweet">
+        <div class="tweet--profile">
+          <a class="base--a tweet--username" href="https://twitter.com/<%= message.tweet.user.screen_name %>"><%= message.tweet.user.name %></a> <span class="tweet--handle">@<%= message.tweet.user.screen_name %></span>
+        </div>
+        <p class="tweet--message"><%= message.tweet.text %>
+        </p>
+        <div class="tweet--sentiment">
+          <img src="/images/Sentiment_Very-Dissatisfied.svg" alt="Very dissatisfied" class="tweet--sentiment-image">
+        </div>
+      </div>
+    </div>
+    <div class="watson-tweet">
+      <div class="watson-tweet--avatar">
+        <div class="watson-tweet--avatar-image-container">
+          <img src="/images/watson-avatar-black.png" alt="" class="tweet--avatar-image">
+        </div>
+      </div>
+      <div class="watson-tweet--tweet">
+        <div class="watson-tweet--profile">
+          <a class="base--a watson-tweet--username" href="https://ibm.com/watson"><%= message.response.screen_name %></a> <span class="watson-tweet--handle">@<%= message.response.screen_name %></span>
+        </div>
+        <p class="watson-tweet--message"><%= message.response.text %>
+        </p>
+        <div class="watson-tweet--metadata">
+          <div class="watson-tweet--tags">
+            <% _.each(message.classifier.classes.slice(0, 3), function(tag, key, list) { %>
+              <span class="watson-tweet--tag"><%= tag %></span>
+            <% });%>
+          </div>
+          <div class="watson-tweet--confidence-score"><%= message.classifier.classes[0].confidence %>% Confidence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/html" id="filtersTemplate">
+  <h4 class="base--h4 filters--header"><%= title %></h4>
+  <div class="filters--group filters--<%= title_id %>">
+    <% _.each(filters, function(filter, key2, list) { %>
+      <input onclick="filterTweets(this);" class="filters--radio base--radio" type="radio" id="<%= title_id %>-<%= key2 %>" name="<%= title_id %>" value="<%= key2 %>">
+      <label class="filters--label base--block-label" for="<%= title_id %>-<%= key2 %>">
+        <div class="filters--label-text"><%= filter %></div>
+        <div class="<%= title_id %> filters--label-counter-<%= key2 %> filters--label-counter">0</div>
+      </label>
+    <% });%>
+  </div>
+</script>
+
+<script type="text/html" id="filterTemplate">
+  <input onclick="filterTweets(this);" class="filters--radio base--radio" type="radio" id="<%= title_id %>-<%= index %>" name="<%= title_id %>" value="<%= index %>">
+  <label class="filters--label base--block-label" for="<%= title_id %>-<%= index %>">
+    <div class="filters--label-text"><%= filter %></div>
+    <div class="<%= title_id %> filters--label-counter-<%= index %> filters--label-counter">0</div>
+  </label>
+</script>
+
+<script type="text/html" id="personalityInsightsAccountTemplate">
+  <div class="personality-insights--avatar">
+    <img src="<%= typeof account.image_url !== 'undefined' ? account.image_url : 'images/default-avatar.png' %>" alt="twitter profile pic" class="personality-insights--avatar-image">
+  </div>
+  <div class="personality-insights--twitter-profile">
+    <div class="personality-insights--username"><%= account.name %></div>
+    <div class="personality-insights--handle">@<%= account.handle %></div>
+    <div class="personality-insights--followers"><span class="personality-insights--followers-count"><%= account.number_followers %></span> Followers</div>
+  </div>
+</script>
+
+<script type="text/html" id="personalityInsightsCharacteristicsTemplate">
+  <% if (items.length === 0) {%>
+    <span class="personality-insights--loading-text">
+      The Personality Insights service is analyzing this user's tweet stream to generate their personality portrait...
+    </span>
+  <% } %>
+  <% if (items.length > 0) { %>
+    <ul class="base--ul personality-insights--list">
+      <% _.each(items, function(item, key, list) { %>
+      <li class="base--li personality-insights--list-item">
+        <div class="personality-insights--list-item-text">
+          <i class="personality-insights--list-item-icon icon <%= item.status ? 'icon-yes' : 'icon-no' %>"></i>
+          <span class="personality-insights--list-item-name"><%= item.text %></span>
+          <div class="personality-insights--list-item-arrowbox"><%= item.hover_text %></div>
+        </div>
+      </li>
+    <% });%>
+  <% } %>
+  </ul>
+</script>
