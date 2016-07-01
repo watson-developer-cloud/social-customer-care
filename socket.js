@@ -19,18 +19,23 @@
 var debug = require('debug')('scc:socket');
 var processTweet = require('./util/process-tweet');
 var topic = process.env.TWITTER_TOPIC || '<topic>';
+var preloadedTweets = [];
 
 module.exports = function(io, twitter) {
   // existing sessions
   var sessions = {};
 
-  twitter.stream({ track: topic, filter_level: 'medium', language: 'en' }, function(stream) {
+  twitter.stream({ track: topic, filter_level: 'low', language: 'en' }, function(stream) {
     debug('Connected to twitter.stream, topic: %s', topic);
     stream.on('data', function(tweet) {
       processTweet(tweet, function (error, processedTweet) {
         if (error) {
           debug('Ignore tweet: %s', tweet.text);
           return;
+        }
+        preloadedTweets.push(processedTweet);
+        if(preloadedTweets.length > 5) {
+          preloadedTweets.shift();
         }
         Object.keys(sessions).forEach(function(id) {
           sessions[id].socket.emit('message', processedTweet);
@@ -51,6 +56,9 @@ module.exports = function(io, twitter) {
   });
 
   io.on('connection', function(socket) {
+    preloadedTweets.forEach(function(tweet){
+      socket.emit('message', tweet);
+    });
     socket.on('message', function() {
       // send initial tweets
       socket.emit('message', 'hello!');
