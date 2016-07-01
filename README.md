@@ -1,4 +1,4 @@
-# Social Customer Care [![Build Status](https://travis.innovate.ibm.com/watson-developer-cloud/social-customer-care.svg?token=ouxuNEZVg24FqsCxcPYL)](https://travis.com/watson-developer-cloud/social-customer-care)
+# Social Customer Care [![Build Status](https://travis-ci.org/watson-developer-cloud/social-customer-care.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/social-customer-care)
 
 This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Tone Analyzer][tone-analyzer], [Alchemy Language][alchemy-language], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
 
