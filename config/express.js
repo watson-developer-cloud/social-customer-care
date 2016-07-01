@@ -22,6 +22,7 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var path = require('path');
 var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
 
 module.exports = function exports(app) {
   // Configure Express
@@ -34,6 +35,7 @@ module.exports = function exports(app) {
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(compression());
   app.use(morgan('dev'));
+  app.use(cookieParser());
 
   // When running in Bluemix add rate-limitation
   // and some other features around security

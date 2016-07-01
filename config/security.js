@@ -20,6 +20,7 @@
 var helmet = require('helmet');
 var rateLimit = require('express-rate-limit');
 var secure = require('express-secure-only');
+var csrf = require('csurf');
 
 module.exports = function(app) {
   app.enable('trust proxy');
@@ -39,4 +40,18 @@ module.exports = function(app) {
       code: 429
     })
   }));
+
+  // 3. csrf
+  var csrfProtection = csrf({
+    cookie: true
+  });
+
+  app.get('/*', csrfProtection, function(req, res, next) {
+    res.locals = {
+      ga: process.env.GOOGLE_ANALYTICS,
+      ct: req.csrfToken()
+    };
+    next();
+  });
+
 };

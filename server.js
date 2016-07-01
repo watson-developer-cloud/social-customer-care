@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 'use strict';
 
-
 require('./dot-env');
 
 var debug = require('debug')('scc:server');

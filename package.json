@@ -1,6 +1,6 @@
 {
   "name": "social-customer-care",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Starter Kit demonstrating how IBM Watson can be used to support customer care on twitter",
   "scripts": {
     "start": "DEBUG='scc:*' node server.js",
@@ -21,6 +21,8 @@
     "body-parser": "^1.13.2",
     "cf-deployment-tracker-client": "^0.1.1",
     "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
     "debug": "^2.2.0",
     "ejs": "^2.4.1",
     "express": "^4.12.2",

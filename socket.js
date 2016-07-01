@@ -24,7 +24,7 @@ module.exports = function(io, twitter) {
   // existing sessions
   var sessions = {};
 
-  twitter.stream({ track: topic, filter_level: 'low', language: 'en' }, function(stream) {
+  twitter.stream({ track: topic, filter_level: 'medium', language: 'en' }, function(stream) {
     debug('Connected to twitter.stream, topic: %s', topic);
     stream.on('data', function(tweet) {
       processTweet(tweet, function (error, processedTweet) {

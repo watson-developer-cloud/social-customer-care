@@ -85,6 +85,13 @@ $(document).ready(function() {
     });
 
   socket.on('message', addMessage);
+
+  // CSRF protection
+  $.ajaxSetup({
+    headers: {
+      'csrf-token': $('meta[name="ct"]').attr('content')
+    }
+  });
 });
 
 /**
