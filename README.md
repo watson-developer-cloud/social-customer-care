@@ -2,11 +2,7 @@
 
 This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Tone Analyzer][tone-analyzer], [Alchemy Language][alchemy-language], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
 
-Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://github.com/watson-developer-cloud/social-customer-care)
-
-You can see a version of this app that is already running by clicking here.
+You can see a version of this app that is already running [here](https://social-customer-care.mybluemix.net/).
 
 **IMPORTANT:**
 1. This application requires an AlchemyAPI key with high transaction limits. The free AlchemyAPI key that you request has a limit of 1000 transactions per day, which is insufficient for significant use of this sample application. See [step 3](#step3) of the [Getting Started](#getting-started) section for information about requesting a higher transaction limit on your sample AlchemyAPI key.
@@ -166,7 +162,7 @@ $ npm install -g gulp
 ```
 $ gulp
 ```
-6. Open http://localhost:3000 to see the running application.
+6. Open `http://localhost:5000` to see the running application.
 
 ## About the Social Customer Care pattern
 For a given input, a trained Natural Language Classifier responds with a list of intent classes and a confidence score. A frequent use case is to use the user intent and confidence scores to determine how best to assist a customer. This pattern can be used to send customers to an appropriate agent, to respond to commonly asked questions, and to begin the appropriate dialog conversation as is done with the [Conversational Agent](https://github.com/watson-developer-cloud/conversational-agent-application-starter-kit) Starter Kit. This Starter Kit demonstrates the basic approach of how the Natural Language Classifier can be easily used to improve customer support.
