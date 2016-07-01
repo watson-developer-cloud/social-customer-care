@@ -1,5 +1,5 @@
 <script type="text/html" id="tweetsTemplate">
-  <div class="tweets--row customer-sentiment-<%= sentiment_index %> support-topics-<%= class_name_index %>">
+  <div class="tweets--row <% _.each(filters, function(filter) { %> <%= filter %> <% }); %> ">
     <div class="tweet">
       <div class="tweet--avatar">
         <div class="tweet--avatar-image-container">
@@ -13,7 +13,7 @@
         <p class="tweet--message"><%= message.tweet.text %>
         </p>
         <div class="tweet--sentiment">
-          <img src="/images/Sentiment_Very-Dissatisfied.svg" alt="Very dissatisfied" class="tweet--sentiment-image">
+          <img src="/images/<%= message.sentiment.replace(/ /g,"_") %>.svg" alt="Very dissatisfied" class="tweet--sentiment-image">
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
         </p>
         <div class="watson-tweet--metadata">
           <div class="watson-tweet--tags">
-            <% _.each(message.classifier.classes.slice(0, 3), function(tag, key, list) { %>
+            <% _.each(message.classifier.classes.slice(0, 3), function(tag) { %>
               <span class="watson-tweet--tag"><%= tag %></span>
             <% });%>
           </div>
@@ -45,15 +45,7 @@
 
 <script type="text/html" id="filtersTemplate">
   <h4 class="base--h4 filters--header"><%= title %></h4>
-  <div class="filters--group filters--<%= title_id %>">
-    <% _.each(filters, function(filter, key2, list) { %>
-      <input onclick="filterTweets(this);" class="filters--radio base--radio" type="radio" id="<%= title_id %>-<%= key2 %>" name="<%= title_id %>" value="<%= key2 %>">
-      <label class="filters--label base--block-label" for="<%= title_id %>-<%= key2 %>">
-        <div class="filters--label-text"><%= filter %></div>
-        <div class="<%= title_id %> filters--label-counter-<%= key2 %> filters--label-counter">0</div>
-      </label>
-    <% });%>
-  </div>
+  <div class="filters--group filters--<%= title_id %>"></div>
 </script>
 
 <script type="text/html" id="filterTemplate">

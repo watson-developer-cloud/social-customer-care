@@ -14,95 +14,90 @@
  * limitations under the License.
  */
 
-var _tweetsTemplate = tweetsTemplate.innerHTML;
-var _filterTemplate = filterTemplate.innerHTML;
-var _filtersTemplate = filtersTemplate.innerHTML;
-// var profileTemplate = personalityInsightsAccountTemplate.innerHTML;
-// var profileCharacteristicsTemplate = personalityInsightsCharacteristicsTemplate.innerHTML;
-
 $(document).ready(function() {
-  var SENTIMENTS = ['Very Dissatisfied', 'Dissatisfied', 'Neutral', 'Satisfied', 'Very Satisfied' ];
-  var CLASS_NAMES = [];
+  // Tweet Filters
+  var FILTERS = [
+    { title: 'Customer sentiment', title_id: 'customer-sentiment', filters: [] },
+    { title: 'Support topics',     title_id: 'support-topics',     filters: [] }
+  ];
 
-  // setup sentiment filter
-  $('.filters').append(_.template(_filtersTemplate, {
-    title: 'Customer sentiment',
-    title_id: 'customer-sentiment',
-    filters: SENTIMENTS
-  }));
+  // Add the filters to the left panel
+  FILTERS.forEach(function(filterCategory) {
+     $('.filters').append(_.template(filtersTemplate.innerHTML, filterCategory));
+   });
 
-  // setup sentiment filter
-  $('.filters').append(_.template(_filtersTemplate, {
-    title: 'Support topics',
-    title_id: 'support-topics',
-    filters: CLASS_NAMES
-  }));
+   /**
+    * Adds the tweet to the filter panel on the left based on the filter criteria
+    * @param  {String} type    Filter type
+    * @param  {String} filter  Filter value
+    * @param  {Array} filters  Filter values
+    * @return {String}         The filter-id
+    */
+  var addTweetToFilter = function(type, filter, filters) {
+    var index = filters.indexOf(filter);
 
-  // socket.io config
-  var ws = ''; // web socket url
-  var socket = io.connect(ws);
+    // if the filter is not already, add it to the filters
+    if (index === -1) {
+     filters.push(filter);
+     index = filters.length - 1;
+     $('.filters--' + type).append(_.template(filterTemplate.innerHTML, {
+       title_id: type,
+       index: index,
+       filter: filter
+     }));
+    }
 
-  socket.on('connect', function() {
-    console.log('socket.onConnect()');
-  });
+    var $count = $('.' + type + '.filters--label-counter-' + index);
+    $count.text(parseInt($count.text()) + 1);
 
-  socket.on('disconnect', function() {
-    console.log('socket.onDisconnect()');
-  });
-
-  socket.on('session', function(session) {
-    console.log('socket.onSession:', session);
-  });
-
-  socket.on('connect_failed', function() {
-    console.log('socket.onConnectFailed()');
-  });
-
-  socket.on('message', function(message){
-    console.log('socket.onMessage()');
-    addMessage(message);
-  });
+    return type + '-' + index;
+  }
 
   /**
-   * Adds a message to the UI
+   * Adds a message (tweet and response) to the UI
    * @param  {Object} message The message that contains the tweet and response
    * @return {undefined}
    */
   var addMessage = function(message) {
     $('.js-loading-screen').hide();
 
-    // add tweet to sentiment filter
-    var sentiment = message.sentiment;
-    var sentimentIndex = SENTIMENTS.indexOf(sentiment);
-    var $sentimentCount = $('.customer-sentiment.filters--label-counter-' + sentimentIndex);
-    var count = parseInt($sentimentCount.text());
-    $sentimentCount.text(count + 1);
-
-    // add tweet to intent filter
-    var className = message.classifier.class_name;
-    var classNameIndex = CLASS_NAMES.indexOf(className);
-    if (classNameIndex == -1) {
-      CLASS_NAMES.push(className);
-      classNameIndex = CLASS_NAMES.length - 1;
-      $('.filters--support-topics').append(_.template(_filterTemplate, {
-        title_id: 'support-topics',
-        index: classNameIndex,
-        filter: className
-      }));
-    }
-    var $classNameCount = $('.support-topics.filters--label-counter-' + CLASS_NAMES.indexOf(className));
-    count = parseInt($classNameCount.text());
-    $classNameCount.text(count + 1);
+    var filters = [
+      addTweetToFilter(FILTERS[0].title_id, message.sentiment, FILTERS[0].filters),
+      addTweetToFilter(FILTERS[1].title_id, message.classifier.class_name, FILTERS[1].filters)
+    ];
 
     // add tweet to the tweets container
-    $('.tweets').prepend(_.template(_tweetsTemplate, {
-      message:message,
-      sentiment_index: sentimentIndex,
-      class_name_index: classNameIndex
-     }));
+    $('.tweets').prepend(_.template(tweetsTemplate.innerHTML, {
+      message: message,
+      filters : filters
+   }));
   }
+
+  // socket.io config
+  var ws = ''; // web socket url
+  var socket = io.connect(ws);
+
+  ['connect', 'disconnect', 'session', 'connect_failed']
+    .forEach(function(event){
+      socket.on(event, function() {
+        console.log('socket: ' + event);
+      });
+    });
+
+  socket.on('message', addMessage);
 });
 
+/**
+ * Filter tweets based on the filter-id
+ * @param  {DOMElement} element The DOM element
+ * @return {undefined}
+ */
 function filterTweets(element) {
-  $('.tweets--row.' + element.id).toggle();
+  $(element).not(':checked').prop('checked', true);
+  //
+  // if (!$element.prop('checked')) {
+  //   $element.prop('checked', false);
+
+  $('.tweets--row').hide();
+  $('.tweets--row.' + element.id).show();
 }

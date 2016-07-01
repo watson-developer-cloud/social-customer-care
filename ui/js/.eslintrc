@@ -1,6 +1,13 @@
 {
-  "global" : {
-    "_": true
+  "rules": {
+    "no-unused-vars": "warn"
+  },
+  "globals" : {
+    "_": true,
+    "io": true,
+    "tweetsTemplate": true,
+    "filterTemplate": true,
+    "filtersTemplate": true
   },
   "env": {
     "jquery": true,
