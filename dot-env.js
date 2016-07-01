@@ -17,7 +17,6 @@
 'use strict';
 
 var debug = require('debug')('scc:env');
-var extend = require('extend');
 var env = {};
 try {
   env = require('./.env.js');
@@ -28,4 +27,8 @@ try {
   debug('Loaded env.js');
 }
 
-extend(process.env, env);
+Object.keys(env).forEach(function(key) {
+  if (!process.env.hasOwnProperty(key)) {
+    process.env[key] = env[key]
+  }
+})

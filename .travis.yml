@@ -2,11 +2,12 @@ language: node_js
 sudo: true
 node_js: 4
 script:
+- npm run build
 - npm run lint
 - npm test
 env:
   global:
-  - CF_APP=social-customer-care-stage
+  - CF_APP=social-customer-care
   - CF_API=https://api.ng.bluemix.net
   - CF_ORGANIZATION=WatsonPlatformServices
   - CF_SPACE=appgallery
