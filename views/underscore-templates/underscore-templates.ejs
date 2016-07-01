@@ -1,5 +1,9 @@
 <script type="text/html" id="tweetsTemplate">
-  <div class="tweets--row <% _.each(filters, function(filter) { %> <%= filter %> <% }); %> ">
+  <div class="tweets--row <% _.each(filters, function(filter) { %> <%= filter %> <% }); %> "
+    data-username="<%= message.tweet.user.screen_name %>"
+    data-name="<%= message.tweet.user.name %>"
+    data-profile="<%= message.tweet.user.profile_image_url_https %>"
+    data-followers="<%= message.tweet.user.followers_count %> ">
     <div class="tweet">
       <div class="tweet--avatar">
         <div class="tweet--avatar-image-container">
@@ -35,7 +39,7 @@
               <span class="watson-tweet--tag"><%= tag %></span>
             <% });%>
           </div>
-          <div class="watson-tweet--confidence-score"><%= message.classifier.classes[0].confidence %>% Confidence</div>
+          <div class="watson-tweet--confidence-score"><%= parseFloat(message.classifier.confidence).toFixed(2) * 100 %>% Confidence</div>
         </div>
       </div>
     </div>
@@ -56,26 +60,32 @@
   </label>
 </script>
 
-<script type="text/html" id="personalityInsightsAccountTemplate">
+<script type="text/html" id="profileTemplate">
   <div class="personality-insights--avatar">
-    <img src="<%= typeof account.image_url !== 'undefined' ? account.image_url : 'images/default-avatar.png' %>" alt="twitter profile pic" class="personality-insights--avatar-image">
+    <img src="<%= typeof profile !== 'undefined' ? profile : 'images/default-avatar.png' %>" alt="twitter profile pic" class="personality-insights--avatar-image">
   </div>
   <div class="personality-insights--twitter-profile">
-    <div class="personality-insights--username"><%= account.name %></div>
-    <div class="personality-insights--handle">@<%= account.handle %></div>
-    <div class="personality-insights--followers"><span class="personality-insights--followers-count"><%= account.number_followers %></span> Followers</div>
+    <div class="personality-insights--username"><%= name %></div>
+    <div class="personality-insights--handle">@<%= username %></div>
+    <div class="personality-insights--followers"><span class="personality-insights--followers-count"><%= followers %></span> Followers</div>
   </div>
 </script>
 
-<script type="text/html" id="personalityInsightsCharacteristicsTemplate">
-  <% if (items.length === 0) {%>
-    <span class="personality-insights--loading-text">
-      The Personality Insights service is analyzing this user's tweet stream to generate their personality portrait...
-    </span>
-  <% } %>
-  <% if (items.length > 0) { %>
-    <ul class="base--ul personality-insights--list">
-      <% _.each(items, function(item, key, list) { %>
+<script type="text/html" id="loadingTemplate">
+<div class="loading-container">
+  <div class="loading-panel">
+    <div class="loading-panel--animation">
+      <svg viewBox="25 25 50 50" class="loading-panel--animation-graphics">
+        <circle cx="50" cy="50" r="20" class="loading-panel--animation-circle"></circle>
+      </svg>
+    </div>
+  </div>
+</div>
+</script>
+
+<script type="text/html" id="profileTraitTemplate">
+  <ul class="base--ul personality-insights--list">
+    <% _.each(big5, function(item, key, list) { %>
       <li class="base--li personality-insights--list-item">
         <div class="personality-insights--list-item-text">
           <i class="personality-insights--list-item-icon icon <%= item.status ? 'icon-yes' : 'icon-no' %>"></i>
@@ -83,7 +93,6 @@
           <div class="personality-insights--list-item-arrowbox"><%= item.hover_text %></div>
         </div>
       </li>
-    <% });%>
-  <% } %>
+    <% }); %>
   </ul>
 </script>

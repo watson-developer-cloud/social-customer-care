@@ -61,15 +61,15 @@ module.exports = function processProfile(profile) {
     return {};
   }
   return {
-    personality_characteristics: [
+    big5: [
       createEntry('big5', true, getMax(profile.tree.children[0].children[0].children)),
       createEntry('big5', false, getMin(profile.tree.children[0].children[0].children))
     ],
-    needs_characteristics: [
+    needs: [
       createEntry('needs', true, getMax(profile.tree.children[1].children[0].children)),
       createEntry('needs', false, getMin(profile.tree.children[1].children[0].children))
     ],
-    values_characteristics: [
+    values: [
       createEntry('values', true, getMax(profile.tree.children[2].children[0].children)),
       createEntry('values', false, getMin(profile.tree.children[2].children[0].children))
     ]

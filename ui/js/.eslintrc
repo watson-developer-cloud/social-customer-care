@@ -7,7 +7,10 @@
     "io": true,
     "tweetsTemplate": true,
     "filterTemplate": true,
-    "filtersTemplate": true
+    "filtersTemplate": true,
+    "profileTemplate": true,
+    "profileTraitTemplate": true,
+    "loadingTemplate": true
   },
   "env": {
     "jquery": true,
