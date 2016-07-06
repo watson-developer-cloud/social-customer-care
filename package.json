@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
+    "backoff": "^2.5.0",
     "bluebird": "^3.4.1",
     "body-parser": "^1.13.2",
     "cf-deployment-tracker-client": "^0.1.1",
