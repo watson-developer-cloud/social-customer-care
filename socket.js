@@ -92,7 +92,7 @@ module.exports = function(io, twitter) {
   fibonacciBackoff.on('backoff', function(number, delay) {
       // Do something when backoff starts, e.g. show to the
       // user the delay before next reconnection attempt.
-      console.log('Attempting to reconect to twitter. Attempts: ' + number + ' ' + delay + 'ms');
+      debug('Attempting to reconect to twitter. Attempts: ' + number + ' ' + delay + 'ms');
   });
 
   fibonacciBackoff.on('ready', function() {
