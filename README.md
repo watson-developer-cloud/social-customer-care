@@ -13,9 +13,9 @@ You can see a version of this app that is already running [here](https://social-
 
 ## Table of Contents
  - [Getting Started](#getting-started)
- - [Running the application locally](#running-the-application-locally)
+ - [Running the application locally](#running-locally)
  - [About the Social Customer Care pattern](#about-the-social-customer-care-pattern)
- - [Adapting/Extending the Starter Kit](#adapting/extending-the-starter-kit)
+ - [Adapting/Extending the Starter Kit](#adaptingextending-the-starter-kit)
  - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
