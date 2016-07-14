@@ -12,10 +12,11 @@ You can see a version of this app that is already running [here](https://social-
 3. The Natural Language Classifier requires training prior prior to running the application.
 
 ## Table of Contents
- - [Getting Started](#gettings-started)
- - [Running the application locally](#Running the Application Locally)
- - [About the Social Customer Care pattern](#About the Social Customer Care pattern)
- - [Troubleshooting](#Troubleshooting)
+ - [Getting Started](#getting-started)
+ - [Running the application locally](#running-the-application-locally)
+ - [About the Social Customer Care pattern](#about-the-social-customer-care-pattern)
+ - [Adapting/Extending the Starter Kit](#adapting/extending-the-starter-kit)
+ - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
 
@@ -180,6 +181,16 @@ To demonstrate this approach, the Starter Kit uses a live stream of the tweets b
 The results of Tone Analyzer, Alchemy Language, and Personality Insights services are used to provide quick insight into the customer. Tone Analyzer is used to determine the current mood of the user based on their tweet. Alchemy Language and Personality Insights are ran on each the customer's past tweets. The entity and keyword extraction of Alchemy Language provides a quick snapshot of the topics that the customer typically tweets about and Personality Insights determines provides an estimate of the customer's personality. This information can be used to provide an agent with quick insight into their customer or even to help send a customer to the most appropriate agent (ex. avoid sending irate customers to a new agent).
 
 **Note**: For the purposes of this starter kit, random bodies of text are substituted for the customer's past tweets. This is done to avoid the issues involved with retrieving past at scale. For your application, past tweets can be easily retrieved by using the [IBM Insights for Twitter](https://console.ng.bluemix.net/docs/services/Twitter/index.html#twitter) Service available on Bluemix.
+
+## Adapting/Extending the Starter Kit
+This Starter Kit works off of Twitter data. However, the concepts used here are platform independent and can be applied wherever you already do customer support. This includes email, sms, Facebook, and chat/messaging apps.
+
+The following are a basic set of instructions for how to adapt the Starter Kit to your own use case.
+1. The Twitter feed can easily be changed by modifying the `TWITTER_TOPIC` variable in your `.env.js` file.
+2. The Natural Language Classifier Service needs a new ground truth for your new feed. The best approach is to collect real user tweets. An easy solution is to use the [Insights for Twitter](https://console.ng.bluemix.net/docs/#services/Twitter/index.html) service available on Bluemix. Using this service, you can retrieve historical tweets from the Twitter Decahose (a 10% random sample of Tweets). Another alternative is to modify the starter kit to save incoming tweets and run the application locally. The number of tweets required will depend upon the complexity of the feed. In most cases, around 300 tweets is enough to receive respectable performance for a proof of concept, demo, or testing.
+3. Create the ground truth for the Natural Language Classifier by classifying the tweets that you collected in the previous step. Further details on this process can be found in the link below.
+4. Decide how the application will handle each use case. The approach taken by the Starter Kit is to provide a faq style response or to delegate the customer to an appropriate agent. This can be customized by altering the `data/default-responses.json` file. Be sure to include an entry for each intent in your classifier ground truth. A more advanced approach is to use the intents returned from the Natural Language Classifier to drive a dialog interaction. The [Conversational Agent](https://github.com/watson-developer-cloud/conversational-agent) Starter Kit provides an example how this can be accomplished.
+5. Use the personality insights profile to drive your customer engagement strategy. The Starter Kit simply displays a few highlights from the customer's personality but much more is possible. Some examples of how to apply the service can be found in the Personality Insight [documentation](https://www.ibm.com/watson/developercloud/doc/personality-insights/basics.shtml#overviewApply).
 
 ## Reference information
 The following links provide more information about the Natural Language Classifier, Tone Analyzer, Alchemy Language, and Personality Insights services.
