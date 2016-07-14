@@ -26,7 +26,7 @@ You can see a version of this app that is already running [here](https://social-
 3. If it is not already installed on your system, download and install the [Cloud-foundry CLI][cloud_foundry] tool.
 4. If it is not already installed on your system, install [Node.js](http://nodejs.org/). Installing Node.js will also install the npm command. Make sure to use node version 4.2.1 as specified in `package.json` or you may run into problems like installation issues.
 5. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`. The relevant portion of the `manifest.yml` file looks like the following:
-```yml
+```
 declared-services:
   natural-language-classifier-service:
     label: natural_language_classifier
@@ -48,44 +48,52 @@ applications:
   memory: 512M
 ```
 6. Connect to Blumix by running the following commands in a terminal window:
-```sh
+```
 $ cf api https://api.ng.bluemix.net
 $ cf login -u <your-Bluemix-ID> -p <your-Bluemix-password>
 ```
 7. Create instances of the required Watson services.
   - Create an instance of the [Natural Language Classifier][natural-language-classifier] service by running the following command:
-  ```sh
-  $ cf create-service natural_language_classifier standard classifier-service
+  ```
+  $ cf create-service natural_language_classifier standard natural-language-classifier-service
   ```
   **Note:** You will see a message that states "Attention: The plan standard of `service natural_language_classifier` is not free. The instance classifier-service will incur a cost. Contact your administrator if you think this is in error.". The first Natural Language Classifier instance that you create is free under the standard plan, so there will be no change if you only create a single classifier instance for use by this application.
 
   - If you already have an Alchemy Language service you will use those credentials. Othwerise, create an instance of the [Alchemy Language][alchemy-language] service by running the following command:
-  ```sh
+  ```
   $ cf create-service alchemy_api free alchemy-language-service
   ```
   **Note:** The free plan of alchemy api has a limit of 1000 API calls a day. This is only sufficient to run quick tests of the starter kit but not fully support the application. The standard plan is not limited w
 
   - Create an instance of the [Personality Insights][personality-insights] service by running the following command:
-  ```sh
+  ```
   $ cf create-service personality_insights tiered personality-insights-service
   ```
   **Note:** You will see a message that states "Attention: The plan `tiered` of service `personality_insights` is not free.  The instance `personality-insights-service` will incur a cost.  Contact your administrator if you think this is in error." The first 100 API calls each month are free, so if you remain under this limit there will be no charge.
 
   - Create an instance of the Tone Analyzer service by running the following command:
-  ```sh
+  ```
   $ cf create-service tone_analyzer standard tone-analyzer-service
   ```
   **Note:** You will see a message that states "Attention: The plan `standard` of service `tone_analyzer` is not free.  The instance `tone-analyzer-service` will incur a cost.  Contact your administrator if you think this is in error." The first 1000 API calls each month are free, so if you remain under this limit there will be no charge.
 
 8. Sign up at [apps.twitter.com][dev-twitter] for application credentials. Create a new application with the `Create new app` button and fill out the required form.
-
-9. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
+9. Create and retrieve service keys to access the Natural Language Classifier
 ```
-curl -u "{username}":"{password}" -F training_data=@classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+cf create-service-key natural-language-classifier-service myKey
+cf service-key natural-language-classifier-service myKey
 ```
-
-10. Provide the credentials to the application by creating a `.env.js` file using this format:
-```node
+10. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
+```
+curl -u "{username}":"{password}" -F training_data=@data/classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+```
+11. Create and retrieve service keys for the Alchemy Language service. If you are using an existing alchemy service, use those credentials instead.
+```
+cf create-service-key alchemy-language-service myKey
+cf service-key alchemy-language-service myKey
+```
+12. Provide the credentials to the application by creating a `.env.js` file using this format:
+```
 module.exports = {
   TWITTER: JSON.stringify([{
     consumer_key: 'consumer_key',
@@ -100,8 +108,8 @@ module.exports = {
 };
 ```
 
-11. Push the updated application live by running the following command:
-```sh
+13. Push the updated application live by running the following command:
+```
 $ cf push
 ```
 
@@ -109,7 +117,7 @@ $ cf push
 First, make sure that you followed steps 1 through 9 in the [previous section](#Getting Started) and that you are still logged in to Bluemix.
 
 1. Expand the  `.env.js` file created previously in the root directory of the project with the following content (the template is provided in the `env.js` file):
-```node
+```
 module.exports = {
   VCAP_SERVICES: JSON.stringify({
    natural_language_classifier: [{
@@ -147,7 +155,7 @@ module.exports = {
 };
 ```
 2. Copy the `username`, `password`, `apikey`, and `url` credentials from your `alchemy-language-service`, `classifier-service`, `tone-analyzer-service`, and `personality-insights-service` services in Bluemix to the previous file. To see the service credentials for each of your service instance run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
-```sh
+```
 $ cf env <application-name>
 ```
 3. Install any dependencies that a local version of your application requires:
