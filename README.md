@@ -12,10 +12,11 @@ You can see a version of this app that is already running [here](https://social-
 3. The Natural Language Classifier requires training prior prior to running the application.
 
 ## Table of Contents
- - [Getting Started](#gettings-started)
- - [Running the application locally](#Running the Application Locally)
- - [About the Social Customer Care pattern](#About the Social Customer Care pattern)
- - [Troubleshooting](#Troubleshooting)
+ - [Getting Started](#getting-started)
+ - [Running the application locally](#running-locally)
+ - [About the Social Customer Care pattern](#about-the-social-customer-care-pattern)
+ - [Adapting/Extending the Starter Kit](#adaptingextending-the-starter-kit)
+ - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
 
@@ -26,7 +27,7 @@ You can see a version of this app that is already running [here](https://social-
 3. If it is not already installed on your system, download and install the [Cloud-foundry CLI][cloud_foundry] tool.
 4. If it is not already installed on your system, install [Node.js](http://nodejs.org/). Installing Node.js will also install the npm command. Make sure to use node version 4.2.1 as specified in `package.json` or you may run into problems like installation issues.
 5. Edit the `manifest.yml` file in the folder that contains your fork and replace `application-name` with a unique name for your copy of the application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`. The relevant portion of the `manifest.yml` file looks like the following:
-```yml
+```
 declared-services:
   natural-language-classifier-service:
     label: natural_language_classifier
@@ -48,44 +49,52 @@ applications:
   memory: 512M
 ```
 6. Connect to Blumix by running the following commands in a terminal window:
-```sh
+```
 $ cf api https://api.ng.bluemix.net
 $ cf login -u <your-Bluemix-ID> -p <your-Bluemix-password>
 ```
 7. Create instances of the required Watson services.
   - Create an instance of the [Natural Language Classifier][natural-language-classifier] service by running the following command:
-  ```sh
-  $ cf create-service natural_language_classifier standard classifier-service
+  ```
+  $ cf create-service natural_language_classifier standard natural-language-classifier-service
   ```
   **Note:** You will see a message that states "Attention: The plan standard of `service natural_language_classifier` is not free. The instance classifier-service will incur a cost. Contact your administrator if you think this is in error.". The first Natural Language Classifier instance that you create is free under the standard plan, so there will be no change if you only create a single classifier instance for use by this application.
 
   - If you already have an Alchemy Language service you will use those credentials. Othwerise, create an instance of the [Alchemy Language][alchemy-language] service by running the following command:
-  ```sh
+  ```
   $ cf create-service alchemy_api free alchemy-language-service
   ```
   **Note:** The free plan of alchemy api has a limit of 1000 API calls a day. This is only sufficient to run quick tests of the starter kit but not fully support the application. The standard plan is not limited w
 
   - Create an instance of the [Personality Insights][personality-insights] service by running the following command:
-  ```sh
+  ```
   $ cf create-service personality_insights tiered personality-insights-service
   ```
   **Note:** You will see a message that states "Attention: The plan `tiered` of service `personality_insights` is not free.  The instance `personality-insights-service` will incur a cost.  Contact your administrator if you think this is in error." The first 100 API calls each month are free, so if you remain under this limit there will be no charge.
 
   - Create an instance of the Tone Analyzer service by running the following command:
-  ```sh
+  ```
   $ cf create-service tone_analyzer standard tone-analyzer-service
   ```
   **Note:** You will see a message that states "Attention: The plan `standard` of service `tone_analyzer` is not free.  The instance `tone-analyzer-service` will incur a cost.  Contact your administrator if you think this is in error." The first 1000 API calls each month are free, so if you remain under this limit there will be no charge.
 
 8. Sign up at [apps.twitter.com][dev-twitter] for application credentials. Create a new application with the `Create new app` button and fill out the required form.
-
-9. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
+9. Create and retrieve service keys to access the Natural Language Classifier
 ```
-curl -u "{username}":"{password}" -F training_data=@classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+cf create-service-key natural-language-classifier-service myKey
+cf service-key natural-language-classifier-service myKey
 ```
-
-10. Provide the credentials to the application by creating a `.env.js` file using this format:
-```node
+10. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
+```
+curl -u "{username}":"{password}" -F training_data=@data/classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+```
+11. Create and retrieve service keys for the Alchemy Language service. If you are using an existing alchemy service, use those credentials instead.
+```
+cf create-service-key alchemy-language-service myKey
+cf service-key alchemy-language-service myKey
+```
+12. Provide the credentials to the application by creating a `.env.js` file using this format:
+```
 module.exports = {
   TWITTER: JSON.stringify([{
     consumer_key: 'consumer_key',
@@ -100,8 +109,8 @@ module.exports = {
 };
 ```
 
-11. Push the updated application live by running the following command:
-```sh
+13. Push the updated application live by running the following command:
+```
 $ cf push
 ```
 
@@ -109,7 +118,7 @@ $ cf push
 First, make sure that you followed steps 1 through 9 in the [previous section](#Getting Started) and that you are still logged in to Bluemix.
 
 1. Expand the  `.env.js` file created previously in the root directory of the project with the following content (the template is provided in the `env.js` file):
-```node
+```
 module.exports = {
   VCAP_SERVICES: JSON.stringify({
    natural_language_classifier: [{
@@ -147,7 +156,7 @@ module.exports = {
 };
 ```
 2. Copy the `username`, `password`, `apikey`, and `url` credentials from your `alchemy-language-service`, `classifier-service`, `tone-analyzer-service`, and `personality-insights-service` services in Bluemix to the previous file. To see the service credentials for each of your service instance run the following command, replacing `<application-name>` with the name of the application that you specified in your `manifest.yml` file:
-```sh
+```
 $ cf env <application-name>
 ```
 3. Install any dependencies that a local version of your application requires:
@@ -172,6 +181,16 @@ To demonstrate this approach, the Starter Kit uses a live stream of the tweets b
 The results of Tone Analyzer, Alchemy Language, and Personality Insights services are used to provide quick insight into the customer. Tone Analyzer is used to determine the current mood of the user based on their tweet. Alchemy Language and Personality Insights are ran on each the customer's past tweets. The entity and keyword extraction of Alchemy Language provides a quick snapshot of the topics that the customer typically tweets about and Personality Insights determines provides an estimate of the customer's personality. This information can be used to provide an agent with quick insight into their customer or even to help send a customer to the most appropriate agent (ex. avoid sending irate customers to a new agent).
 
 **Note**: For the purposes of this starter kit, random bodies of text are substituted for the customer's past tweets. This is done to avoid the issues involved with retrieving past at scale. For your application, past tweets can be easily retrieved by using the [IBM Insights for Twitter](https://console.ng.bluemix.net/docs/services/Twitter/index.html#twitter) Service available on Bluemix.
+
+## Adapting/Extending the Starter Kit
+This Starter Kit works off of Twitter data. However, the concepts used here are platform independent and can be applied wherever you already do customer support. This includes email, sms, Facebook, and chat/messaging apps.
+
+The following are a basic set of instructions for how to adapt the Starter Kit to your own use case.
+1. The Twitter feed can easily be changed by modifying the `TWITTER_TOPIC` variable in your `.env.js` file.
+2. The Natural Language Classifier Service needs a new ground truth for your new feed. The best approach is to collect real user tweets. An easy solution is to use the [Insights for Twitter](https://console.ng.bluemix.net/docs/#services/Twitter/index.html) service available on Bluemix. Using this service, you can retrieve historical tweets from the Twitter Decahose (a 10% random sample of Tweets). Another alternative is to modify the starter kit to save incoming tweets and run the application locally. The number of tweets required will depend upon the complexity of the feed. In most cases, around 300 tweets is enough to receive respectable performance for a proof of concept, demo, or testing.
+3. Create the ground truth for the Natural Language Classifier by classifying the tweets that you collected in the previous step. Further details on this process can be found in the link below.
+4. Decide how the application will handle each use case. The approach taken by the Starter Kit is to provide a faq style response or to delegate the customer to an appropriate agent. This can be customized by altering the `data/default-responses.json` file. Be sure to include an entry for each intent in your classifier ground truth. A more advanced approach is to use the intents returned from the Natural Language Classifier to drive a dialog interaction. The [Conversational Agent](https://github.com/watson-developer-cloud/conversational-agent) Starter Kit provides an example how this can be accomplished.
+5. Use the personality insights profile to drive your customer engagement strategy. The Starter Kit simply displays a few highlights from the customer's personality but much more is possible. Some examples of how to apply the service can be found in the Personality Insight [documentation](https://www.ibm.com/watson/developercloud/doc/personality-insights/basics.shtml#overviewApply).
 
 ## Reference information
 The following links provide more information about the Natural Language Classifier, Tone Analyzer, Alchemy Language, and Personality Insights services.

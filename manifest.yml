@@ -12,7 +12,7 @@ applications:
 - services:
    - natural-language-classifier-service
    - personality-insights-service
-   - tone-analyzer-standard
+   - tone-analyzer-service
   name: social-customer-care
   command: npm start
   path: .
