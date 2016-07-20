@@ -30,6 +30,7 @@ module.exports = function(io, twitter) {
     twitter.stream({ track: topic, filter_level: 'low', language: 'en' }, function(stream) {
       debug('Connected to twitter.stream, topic: %s', topic);
       stream.on('data', function(tweet) {
+        fibonacciBackoff.reset();
         processTweet(tweet, function (error, processedTweet) {
           if (error) {
             debug('Ignore tweet: %s', tweet.text);
