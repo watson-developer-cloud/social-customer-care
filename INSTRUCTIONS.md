@@ -100,17 +100,17 @@ So let’s get started. The first thing to do is to build out the shell of our a
       
       TWITTER_TOPIC: '@support',
       
-      NATURAL_LANGUAGE_CLASSIFIER_USERNAME: '<NLC USERNAME>',
-      NATURAL_LANGUAGE_CLASSIFIER_PASSWORD: '<NLC PASSWORD>',
+      NATURAL_LANGUAGE_CLASSIFIER_USERNAME: '<Natural Language Classfier username>',
+      NATURAL_LANGUAGE_CLASSIFIER_PASSWORD: '<Natural Language Classfier password>',
       CLASSIFIER_ID: ' CLASSIFIER ID',
       
-      PERSONALITY_INSIGHTS_USERNAME: '<PI USERNAME>',
-      PERSONALITY_INSIGHTS_PASSWORD: '<PI PASSWORD>',
+      PERSONALITY_INSIGHTS_USERNAME: '<Personality Insights username>',
+      PERSONALITY_INSIGHTS_PASSWORD: '<Personality Insights password>',
 
-      TONE_ANALYZER_USERNAME: '<PI USERNAME>',
-      TONE_ANALYZER_PASSWORD: '<PI PASSWORD>',
+      TONE_ANALYZER_USERNAME: '<Tone Analyzer username>',
+      TONE_ANALYZER_PASSWORD: '<Tone Analyzer password>',
       
-      ALCHEMY_API_KEY: 'ALCHEMY KEY'
+      ALCHEMY_API_KEY: '<Alchemy API apikey>'
     };
     ```
 
