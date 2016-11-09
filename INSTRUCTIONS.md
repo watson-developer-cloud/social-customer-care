@@ -1,7 +1,5 @@
 # Watson Hands On Labs - Social Customer Care
 
-This lab was originally created as a part of the World Developer Conference in Nov 2016.
-
 During this lab, you will use the [Natural Language Classifier][natural_language_classifier] service to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Tone Analyzer][tone_analyzer], [Alchemy Language][alchemy_language], and [Personality Insights][personality_insights] demonstrate how to efficiently provide an agent with customer insights.
 
 You can see a version of this app that is already running [here](https://social-customer-care.mybluemix.net/). 
@@ -20,13 +18,13 @@ So let’s get started. The first thing to do is to build out the shell of our a
 
 1. Clone the repository into your computer.
 
-   ```sh
+   ```none
    git clone https://github.com/watson-developer-cloud/social-customer-care.git
    ```
 
-2. [Sign up][sign_up] in Bluemix or use an existing account.
-3. If it is not already installed on your system, download and install the [Cloud-foundry CLI][cloud_foundry] tool.
-4. Edit the `manifest.yml` file in the folder that contains your code and replace `social-customer-care` with a unique name for your application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`. The relevant portion of the `manifest.yml` file looks like the following:
+1. [Sign up][sign_up] in Bluemix or use an existing account.
+1. If it is not already installed on your system, download and install the [Cloud-foundry CLI][cloud_foundry] tool.
+1. Edit the `manifest.yml` file in the folder that contains your code and replace `social-customer-care` with a unique name for your application. The name that you specify determines the application's URL, such as `application-name.mybluemix.net`. The relevant portion of the `manifest.yml` file looks like the following:
 
     ```yml
     declared-services:
@@ -50,55 +48,46 @@ So let’s get started. The first thing to do is to build out the shell of our a
       memory: 512M
     ```
 
-6. Connect to Bluemix by running the following commands in a terminal window:
+1. Connect to Bluemix by running the following commands in a terminal window:
 
-  ```sh
+  ```none
   cf api https://api.ng.bluemix.net
   cf login -u <your-Bluemix-ID> -p <your-Bluemix-password>
   ```
 
-7. Create an instance of the Natural Language Classifier in Bluemix by running the following command:
+1. Create and retrieve service keys to access the [Natural Language Classifier][natural_language_classifier] by running the following command:
 
-  ```
+  ```none
   cf create-service natural_language_classifier standard natural-language-classifier-service
+  cf create-service-key natural-language-classifier-service myKey
+  cf service-key natural-language-classifier-service myKey
   ```
 
+1. Create and retrieve service keys to access the [AlchemyLanguage][alchemy_language] by running the following command:
 
-8. Create an instance of the [AlchemyLanguage][alchemy_language] service:
-
-  ```sh
+  ```none
   cf create-service alchemy_api free alchemy-language-service
+  cf create-service-key alchemy-language-service myKey
+  cf service-key alchemy-language-service myKey
+  ```
+
+1. Create and retrieve service keys to access the [Personality Insights][personality_insights] by running the following command:
+
+  ```none
+  cf create-service personality_insights tiered personality-insights-service
+  cf create-service-key personality-insights-service myKey
+  cf service-key personality-insights-service myKey
   ```
   
-10. Create an instance of the [Personality Insights][personality_insights] service:
-
-  ```sh
-  cf create-service personality_insights tiered personality-insights-service
-  ```
-
-8. Create and retrieve service keys to access the Natural Language Classifier:
-
-    ```sh
-    cf create-service-key natural-language-classifier-service myKey
-    cf service-key natural-language-classifier-service myKey
-    ```
-    
-9. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
+1. The Natural Language Classifier requires training prior to using the application. The training data is provided in `data/classifier-training-data.csv`. Adapt the following curl command to train your classifier (replace the username and password with the service credentials of the Natural Language Classifier created in the last step):
 
     ```sh
     curl -u "{username}":"{password}" -F training_data=@data/classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
     ```
 
-10. Create and retrieve service keys for the Alchemy Language service. If you are using an existing alchemy service, use those credentials instead.
+1. Sign up at [apps.twitter.com][dev-twitter] for application credentials. Create a new application with the `Create new app` button and fill out the required form.
 
-    ```sh
-    cf create-service-key alchemy-language-service myKey
-    cf service-key alchemy-language-service myKey
-    ```
-
-11. Sign up at [apps.twitter.com][dev-twitter] for application credentials. Create a new application with the `Create new app` button and fill out the required form.
-
-12. Provide the credentials to the application by creating a `.env.js` file using this format:
+1. Provide the credentials from step 6 - 8 to the application by creating a `.env.js` file using this format:
 
     ```js
     module.exports = {
@@ -108,24 +97,58 @@ So let’s get started. The first thing to do is to build out the shell of our a
         access_token_key: 'twitter_access_token_key',
         access_token_secret: 'twitter_access_token_secret'
       }]),
+      
       TWITTER_TOPIC: '@support',
+      
+      NATURAL_LANGUAGE_CLASSIFIER_USERNAME: '<NLC USERNAME>',
+      NATURAL_LANGUAGE_CLASSIFIER_PASSWORD: '<NLC PASSWORD>',
       CLASSIFIER_ID: ' CLASSIFIER ID',
-      ALCHEMY_API_KEY: 'ALCHEMY KEY',
-      DEBUG: 'scc:*'
+      
+      PERSONALITY_INSIGHTS_USERNAME: '<PI USERNAME>',
+      PERSONALITY_INSIGHTS_PASSWORD: '<PI PASSWORD>',
+
+      TONE_ANALYZER_USERNAME: '<PI USERNAME>',
+      TONE_ANALYZER_PASSWORD: '<PI PASSWORD>',
+      
+      ALCHEMY_API_KEY: 'ALCHEMY KEY'
     };
     ```
 
-13. Push the updated application live by running the following command:
+1. Install the dependencies you application need:
 
-    ```sh
-    cf push
-    ```
+  ```none
+  npm install
+  ```
+
+1. Build the application UI:
+
+  ```none
+  npm run build
+  ```
+  
+1. Start the application by running:
+
+  ```none
+  gulp
+  ```
+
+1. Test your application locally by going to: [http://localhost:5000/](http://localhost:5000/)
+
+## Deploying your application to Bluemix    
+
+1. Push the updated application live by running the following command:
+
+  ```none
+  cf push
+  ```
 
 
-## Test
 
-JEFF WRITE SOMETHING HERE TELLING THEM TO GO TO THE BLUEMIX APP.
+After completing the steps above, you are ready to test your application. Start a browser and enter the URL of your application.
 
+                  <application-name>.mybluemix.net
+
+You can also find your application name when you click on your application in Bluemix.
 
 # Congratulations
 
