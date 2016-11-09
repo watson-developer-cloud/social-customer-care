@@ -71,6 +71,14 @@ So let’s get started. The first thing to do is to build out the shell of our a
   cf service-key alchemy-language-service myKey
   ```
 
+1. Create and retrieve service keys to access the [Tone Analyzer][tone_analyzer] by running the following command:
+
+  ```none
+  cf create-service tone_analyzer standard tone-analyzer-service
+  cf create-service-key tone-analyzer-service myKey
+  cf service-key tone-analyzer-service myKey
+  ```
+  
 1. Create and retrieve service keys to access the [Personality Insights][personality_insights] by running the following command:
 
   ```none
