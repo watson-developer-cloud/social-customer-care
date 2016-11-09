@@ -1,6 +1,6 @@
 # Watson Hands On Labs - Social Customer Care
 
-During this lab, you will use the [Natural Language Classifier][natural_language_classifier] service to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Tone Analyzer][tone_analyzer], [Alchemy Language][alchemy_language], and [Personality Insights][personality_insights] demonstrate how to efficiently provide an agent with customer insights.
+During this lab, you will use the [Natural Language Classifier][natural_language_classifier] service to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Alchemy Language][alchemy_language], and [Personality Insights][personality_insights] demonstrate how to efficiently provide an agent with customer insights.
 
 You can see a version of this app that is already running [here](https://social-customer-care.mybluemix.net/). 
 
@@ -34,14 +34,10 @@ So let’s get started. The first thing to do is to build out the shell of our a
       personality-insights-service:
         label: personality_insights
         plan: tiered
-      tone-analyzer-standard:
-        label: tone_analyzer
-        plan: standard
     applications:
       - services:
         - natural-language-classifier-service
         - personality-insights-service
-        - tone-analyzer-standard
       name: social-customer-care
       command: npm start
       path: .
@@ -106,9 +102,6 @@ So let’s get started. The first thing to do is to build out the shell of our a
       
       PERSONALITY_INSIGHTS_USERNAME: '<Personality Insights username>',
       PERSONALITY_INSIGHTS_PASSWORD: '<Personality Insights password>',
-
-      TONE_ANALYZER_USERNAME: '<Tone Analyzer username>',
-      TONE_ANALYZER_PASSWORD: '<Tone Analyzer password>',
       
       ALCHEMY_API_KEY: '<Alchemy API apikey>'
     };
@@ -162,5 +155,4 @@ You have completed the Social Customer Care Lab! :bowtie:
 [alchemy_language]: http://www.ibm.com/watson/developercloud/doc/alchemylanguage
 [personality_insights]: http://www.ibm.com/watson/developercloud/doc/personality-insights
 [natural_language_classifier]: http://www.ibm.com/watson/developercloud/doc/nl-classifier
-[tone_analyzer]: http://www.ibm.com/watson/developercloud/doc/tone-analyzer
 [cloud_foundry]: https://github.com/cloudfoundry/cli
