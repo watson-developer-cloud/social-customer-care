@@ -85,7 +85,7 @@ So let’s get started. The first thing to do is to build out the shell of our a
     curl -u "{username}":"{password}" -F training_data=@data/classifier-training-data.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
     ```
 
-1. Sign up at [apps.twitter.com][dev-twitter] for application credentials. Create a new application with the `Create new app` button and fill out the required form.
+1. Sign up at [dev-twitter](http://apps.twitter.com) for application credentials. Create a new application with the `Create new app` button and fill out the required form.
 
 1. Provide the credentials from step 6 - 8 to the application by creating a `.env.js` file using this format:
 
