@@ -196,23 +196,23 @@ The following are a basic set of instructions for how to adapt the Starter Kit t
 The following links provide more information about the Natural Language Classifier, Tone Analyzer, Alchemy Language, and Personality Insights services.
 
 ### Natural Language Classifier
-  * [API documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier/): Get an in-depth knowledge of the Natural Language Classifier service
-  * [API reference](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/natural-language-classifier/api/v1/): SDK code examples and reference
+  * [API documentation](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html): Get an in-depth knowledge of the Natural Language Classifier service
+  * [API reference](http://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/): SDK code examples and reference
   * [API Explorer](https://watson-api-explorer.mybluemix.net/apis/natural-language-classifier-v1): Try out the API
-  * [Creating your own classifier](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/nl-classifier/get_start.shtml): How to use the API to create and use your own classifier
+  * [Creating your own classifier](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/getting-started.html): How to use the API to create and use your own classifier
 
 ### Tone Analyzer
-  * [API documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/): Get an in-depth knowledge of the Natural Language Classifier service
-  * [API reference](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer/api/v1/): SDK code examples and reference
-  * [API explorer](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/tone-analyzer-apis.html): Try out the REST API
+  * [API documentation](http://www.ibm.com/watson/developercloud/doc/tone-analyzer/): Get an in-depth knowledge of the Natural Language Classifier service
+  * [API reference](http://www.ibm.com/watson/developercloud/tone-analyzer/api/v3/): SDK code examples and reference
+  * [API explorer](https://watson-api-explorer.mybluemix.net/apis/tone-analyzer-v3): Try out the REST API
 
 ### AlchemyAPI
   * [API documentation](http://www.alchemyapi.com/api): Get an in-depth understanding of the AlchemyAPI services
   * [AlchemyData News reference](http://docs.alchemyapi.com/): API and query gallery
 
 ### Personality Insights
-  * [API documentation](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/): Get an in-depth understanding of the Personality Insights services
-  * [API reference](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights/api/v2/): SDK code examples and reference
+  * [API documentation](http://www.ibm.com/watson/developercloud/doc/personality-insights/): Get an in-depth understanding of the Personality Insights services
+  * [API reference](http://www.ibm.com/watson/developercloud/personality-insights/api/v3/): SDK code examples and reference
   * [API explorerer](https://watson-api-explorer.mybluemix.net/apis/personality-insights-v2): Try out the REST API
 
 ## Troubleshooting
@@ -255,8 +255,8 @@ Deployment tracking can be disabled by removing `require('cf-deployment-tracker-
 [sign_up]: https://console.ng.bluemix.net/registration/
 [get-alchemyapi-key]: https://console.ng.bluemix.net/catalog/services/alchemyapi/
 
-[tone-analyzer]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tone-analyzer.html
-[alchemy-language]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-language.html
-[natural-language-classifier]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/nl-classifier.html
-[personality-insights]:http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html
+[tone-analyzer]: http://www.ibm.com/watson/developercloud/tone-analyzer.html
+[alchemy-language]: http://www.ibm.com/watson/developercloud/alchemy-language.html
+[natural-language-classifier]: http://www.ibm.com/watson/developercloud/nl-classifier.html
+[personality-insights]: http://www.ibm.com/watson/developercloud/personality-insights.html
 [dev-twitter]: http://apps.twitter.com
