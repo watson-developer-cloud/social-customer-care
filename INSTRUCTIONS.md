@@ -169,6 +169,6 @@ You have completed the Social Customer Care Lab! :bowtie:
 [wdc_services]: http://www.ibm.com/watson/developercloud/services-catalog.html
 [alchemy_language]: http://www.ibm.com/watson/developercloud/doc/alchemylanguage
 [personality_insights]: http://www.ibm.com/watson/developercloud/doc/personality-insights
-[natural_language_classifier]: http://www.ibm.com/watson/developercloud/doc/nl-classifier
+[natural_language_classifier]: http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html
 [tone_analyzer]: http://www.ibm.com/watson/developercloud/doc/tone-analyzer
 [cloud_foundry]: https://github.com/cloudfoundry/cli
