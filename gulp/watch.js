@@ -2,8 +2,6 @@
 * Watches all the files for changes
 **/
 
-'use strict';
-
 var gulp = require('gulp');
 
 var tasks = [

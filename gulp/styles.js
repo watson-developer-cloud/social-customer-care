@@ -2,8 +2,6 @@
 * Compiles SCSS to CSS
 **/
 
-'use strict';
-
 var paths = require('./config.js').paths;
 var gulp = require('gulp');
 var sass = require('gulp-sass');

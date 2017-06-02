@@ -2,8 +2,6 @@
  * Compiles JS to dist
  **/
 
-'use strict';
-
 var paths = require('./config.js').paths;
 var gulp = require('gulp');
 var runSequence = require('run-sequence');

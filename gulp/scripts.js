@@ -2,8 +2,6 @@
  * Compiles src/js to public/js
  **/
 
-'use strict';
-
 var paths = require('./config.js').paths;
 var gulp = require('gulp');
 var concat = require('gulp-concat');

@@ -2,8 +2,6 @@
  * Browser Sync setup and tasks
  **/
 
-'use strict';
-
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 
