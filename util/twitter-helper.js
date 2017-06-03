@@ -1,5 +1,5 @@
 var twitter = require('twitter');
-var debug = require('debug')('scc:twitter-helper')
+var debug = require('debug')('scc:twitter-helper');
 var MAX_COUNT = 200;
 
 /**

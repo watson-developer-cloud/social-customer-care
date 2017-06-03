@@ -7,8 +7,8 @@ $(document).ready(function() {
 
   // Add the filters to the left panel
   FILTERS.forEach(function(filterCategory) {
-     $('.filters').append(_.template(filtersTemplate.innerHTML, filterCategory));
-   });
+    $('.filters').append(_.template(filtersTemplate.innerHTML, filterCategory));
+  });
 
    /**
     * Adds the tweet to the filter panel on the left based on the filter criteria
@@ -22,20 +22,20 @@ $(document).ready(function() {
 
     // if the filter is not already, add it to the filters
     if (index === -1) {
-     filters.push(filter);
-     index = filters.length - 1;
-     $('.filters--' + type).append(_.template(filterTemplate.innerHTML, {
-       title_id: type,
-       index: index,
-       filter: filter
-     }));
+      filters.push(filter);
+      index = filters.length - 1;
+      $('.filters--' + type).append(_.template(filterTemplate.innerHTML, {
+        title_id: type,
+        index: index,
+        filter: filter
+      }));
     }
 
     var $count = $('.' + type + '.filters--label-counter-' + index);
     $count.text(parseInt($count.text()) + 1);
 
     return type + '-' + index;
-  }
+  };
 
   /**
    * Adds a message (tweet and response) to the UI
@@ -54,8 +54,8 @@ $(document).ready(function() {
     $('.tweets').prepend(_.template(tweetsTemplate.innerHTML, {
       message: message,
       filters : filters
-   }));
-  }
+    }));
+  };
 
   // socket.io config
   var ws = ''; // web socket url
@@ -64,18 +64,12 @@ $(document).ready(function() {
   ['connect', 'disconnect', 'session', 'connect_failed']
     .forEach(function(event){
       socket.on(event, function() {
-        console.log('socket: ' + event);
+        console.log('socket: ' + event); // eslint-disable-line
       });
     });
 
   socket.on('message', addMessage);
 
-  // CSRF protection
-  $.ajaxSetup({
-    headers: {
-      'csrf-token': $('meta[name="ct"]').attr('content')
-    }
-  });
 });
 
 /**
@@ -83,7 +77,7 @@ $(document).ready(function() {
  * @param  {DOMElement} element The DOM element
  * @return {undefined}
  */
-function filterTweets(element) {
+function filterTweets(element) { // eslint-disable-line
   $(element).not(':checked').prop('checked', true);
 
   $('.tweets--row').hide();

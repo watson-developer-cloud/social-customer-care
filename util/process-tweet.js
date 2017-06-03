@@ -2,19 +2,12 @@ var async = require('async');
 var extend = require('extend');
 var watson = require('watson-developer-cloud');
 
-var toneAnalyzer = watson.tone_analyzer({ version:'v3', version_date: '2016-05-19' });
-
 var classifier = watson.natural_language_classifier({ version: 'v1' });
 var classifier_id = process.env.CLASSIFIER_ID || '<classifier-id>';
 
-var alchemyLanguage = watson.alchemy_language({
-  version: 'v1',
-  api_key: process.env.ALCHEMY_API_KEY || '<api-key>'
-});
-var features = ['concepts', 'entities', 'keywords', 'taxonomy',
-                'doc-emotion', 'relations', 'doc-sentiment', 'typed-rels'].join(',');
-
-var responses = require('../data/default-responses');
+var naturalLanguageUnderstanding = watson.natural_language_understanding({ version: 'v1', version_date:'2016-01-23' });
+var features = {sentiment: {}};
+var responses = require('../training/default-responses');
 
 /**
  * Clean the text removing symbols and numbers
@@ -35,13 +28,12 @@ function cleanText(text) {
 function createProcessors(text) {
   return [
     classifier.classify.bind(classifier, { text: text, classifier_id: classifier_id }),
-    alchemyLanguage.combined.bind(alchemyLanguage, { text: text, extract: features }),
-    toneAnalyzer.tone.bind(toneAnalyzer, { text: text })
+    naturalLanguageUnderstanding.analyze.bind(naturalLanguageUnderstanding, { text: text, language: 'en', features: features })
   ];
 }
 
 var getSentiment = function(sentiment) {
-  var score = sentiment.score || 0;
+  var score = sentiment.document.score || 0;
   if (score <= -0.5) {
     return 'Very Dissatisfied';
   } else if (score <= -0.25) {
@@ -62,7 +54,7 @@ var getSentiment = function(sentiment) {
  * @return {undefined}
  */
 module.exports = function processTweet(tweet, callback) {
-  tweet.cleaned_text = cleanText(tweet.text)
+  tweet.cleaned_text = cleanText(tweet.text);
 
   if (tweet.in_reply_to_status_id !== null ||
       tweet.retweeted_status !== undefined ||
@@ -79,11 +71,8 @@ module.exports = function processTweet(tweet, callback) {
       var classes = response[0][0].classes.map(function(e){
         return e.class_name;
       });
-
       var result = {
         tweet: tweet,
-        alchemy_language: response[1],
-        tone_analyzer: response[2][0],
         classifier: extend({ classes: classes }, response[0][0].classes[0]),
         response: {
           text: responses[intent],
@@ -91,8 +80,8 @@ module.exports = function processTweet(tweet, callback) {
           screen_name: 'WatsonSupport'
         }
       };
-      result.sentiment = getSentiment(result.alchemy_language.docSentiment);
+      result.sentiment = getSentiment(response[1][0].sentiment);
       callback(null, result);
     }
   });
-}
+};

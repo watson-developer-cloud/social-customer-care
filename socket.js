@@ -16,6 +16,7 @@ module.exports = function(io, twitter) {
         fibonacciBackoff.reset();
         processTweet(tweet, function (error, processedTweet) {
           if (error) {
+            debug(error);
             debug('Ignore tweet: %s', tweet.text);
             return;
           }
@@ -26,7 +27,7 @@ module.exports = function(io, twitter) {
           Object.keys(sessions).forEach(function(id) {
             sessions[id].socket.emit('message', processedTweet);
           });
-        })
+        });
       });
       stream.on('error', function(error) {
         debug('Error connecting to twitter.stream: %s', error);
@@ -38,7 +39,7 @@ module.exports = function(io, twitter) {
         fibonacciBackoff.backoff();
       });
     });
-  }
+  };
 
   // Create a session on socket connection
   io.use(function(socket, next) {
@@ -75,16 +76,16 @@ module.exports = function(io, twitter) {
   fibonacciBackoff.on('backoff', function(number, delay) {
       // Do something when backoff starts, e.g. show to the
       // user the delay before next reconnection attempt.
-      debug('Attempting to reconect to twitter. Attempts: ' + number + ' ' + delay + 'ms');
+    debug('Attempting to reconect to twitter. Attempts: ' + number + ' ' + delay + 'ms');
   });
 
   fibonacciBackoff.on('ready', function() {
     connectTwitter();
-  })
+  });
 
   fibonacciBackoff.on('fail', function() {
-    debug('Failed to connect to twitter after multiple attempts.')
-  })
+    debug('Failed to connect to twitter after multiple attempts.');
+  });
 
   fibonacciBackoff.backoff();
 };

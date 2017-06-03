@@ -3,13 +3,11 @@
 
 <head>
   <link rel="stylesheet" href="css/style.css">
-  <title>Social Customer Care</title>
+  <title><%= bluemix.name -%></title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="ct" content="<$= locals.ct $>">
-  <meta name="og:title" content="Social Customer Care" />
-  <meta name="og:description" content="This application demonstrates how the Natural Language Classifier can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, Tone Analyzer, Alchemy Language, and Personality Insights demonstrate how to efficiently provide an agent with customer insights." />
+  <meta name="og:title" content="<%= bluemix.name -%>" />
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 
@@ -20,14 +18,6 @@
       <span class="wordmark--left"><img class="header--avatar-icon" src="images/watson-avatar-white.png" alt="Watson Avatar"></span>
       <span class="wordmark--right" style='text-decoration: none;'>Social Customer Care</span>
     </a>
-    <nav role="menubar" class="heading-nav">
-      <li role="presentation" class="base--li heading-nav--li">
-        <a href="https://www.ibm.com/developerworks/community/" role="menuitem" class="heading-nav--item">Community</a>
-      </li>
-      <li role="presentation" class="base--li heading-nav--li">
-        <a href="https://github.com/watson-developer-cloud/social-customer-care/" role="menuitem" class="heading-nav--item">Fork on GitHub</a>
-      </li>
-    </nav>
   </header>
 
   <!-- Body -->
@@ -92,16 +82,6 @@
   <$ include ./underscore-templates/underscore-templates.ejs $>
 
   <script type="text/javascript" src="js/demo.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', '<$= locals.ga $>', 'auto');
-    ga('send', 'pageview');
-
-  </script>
 </body>
 
 </html>

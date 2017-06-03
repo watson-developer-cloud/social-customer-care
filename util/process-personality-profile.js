@@ -1,8 +1,11 @@
+var hover_text = require('../training/personality-insights-descriptions');
+
 /**
  * Filter out maximun and minimum traits
  * @param  {Object} profile The Personality Insights profile
  * @return {Object}      The processed profile
  */
+
 function getMax(list){
   var max = 0;
   var id;
@@ -32,8 +35,9 @@ function createEntry(treeName, status, item){
     tree: treeName,
     status: status,
     category_name: item.name,
-    text: item.name
-  }
+    text: item.name,
+    hover_text: hover_text[treeName][item.name]
+  };
 }
 
 module.exports = function processProfile(profile) {
@@ -53,5 +57,5 @@ module.exports = function processProfile(profile) {
       createEntry('values', true, getMax(profile.tree.children[2].children[0].children)),
       createEntry('values', false, getMin(profile.tree.children[2].children[0].children))
     ]
-  }
-}
+  };
+};

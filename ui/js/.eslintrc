@@ -14,7 +14,7 @@
   },
   "env": {
     "jquery": true,
-    "browser": true,
+    "browser": true
   },
-  "extends": "../../.eslintrc",
+  "extends": "../../.eslintrc"
 }

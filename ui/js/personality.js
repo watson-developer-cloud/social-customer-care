@@ -7,7 +7,7 @@ $(document).ready(function() {
   var closeProfile = function() {
     $panel.removeClass('show');
     $('.tweet').removeClass('selected');
-  }
+  };
 
   // Click on profile close
   $(document).on('click', '.personality-insights-container--cancel-icon', closeProfile);
@@ -36,10 +36,10 @@ $(document).ready(function() {
     })
     .fail(function(error) {
       $loading.hide();
-      console.log(error);
+      console.log(error); // eslint-disable-line
       $profile.html(error);
     });
 
     $panel.addClass('show');
-  }
+  };
 });

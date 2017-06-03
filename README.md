@@ -1,6 +1,6 @@
 # <%= bluemix.name -%> [![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
 
-This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Tone Analyzer][tone-analyzer], [Natural Language Understanding][natural-language-understanding], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
+This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Natural Language Understanding][natural-language-understanding], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
 
 You can see a version of this app that is already running [here](https://social-customer-care.mybluemix.net/).
 
@@ -106,12 +106,6 @@ The following links provide more information about the Natural Language Classifi
 * [API Explorer](https://watson-api-explorer.mybluemix.net/apis/natural-language-classifier-v1): Try out the API
 * [Creating your own classifier](http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/getting-started.html): How to use the API to create and use your own classifier
 
-### Tone Analyzer
-
-* [API documentation](http://www.ibm.com/watson/developercloud/doc/tone-analyzer/): Get an in-depth knowledge of the Natural Language Classifier service
-* [API reference](http://www.ibm.com/watson/developercloud/tone-analyzer/api/v3/): SDK code examples and reference
-* [API explorer](https://watson-api-explorer.mybluemix.net/apis/tone-analyzer-v3): Try out the REST API
-
 ### Natural Language Understanding
 
 * [API documentation](http://www.alchemyapi.com/api): Get an in-depth understanding of the AlchemyAPI services
@@ -128,7 +122,6 @@ The following links provide more information about the Natural Language Classifi
 
   This sample code is licensed under Apache 2.0.
 
-[tone-analyzer]: http://www.ibm.com/watson/developercloud/tone-analyzer.html
 [natural-language-understanding]: http://www.ibm.com/watson/developercloud/natural-language-understanding.html
 [natural-language-classifier]: http://www.ibm.com/watson/developercloud/nl-classifier.html
 [personality-insights]: http://www.ibm.com/watson/developercloud/personality-insights.html

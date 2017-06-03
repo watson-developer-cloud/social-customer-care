@@ -1,4 +1,6 @@
+#! /usr/bin/env node
 'use strict';
+
 var debug = require('debug')('scc:train');
 
 // This helps to run the application in local development environment
