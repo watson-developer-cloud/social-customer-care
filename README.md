@@ -111,7 +111,7 @@ The following links provide more information about the Natural Language Classifi
 
 ## License
 
-MIT.
+Apache-2.0.
 
 [natural-language-understanding]: http://www.ibm.com/watson/developercloud/natural-language-understanding.html
 [natural-language-classifier]: http://www.ibm.com/watson/developercloud/nl-classifier.html
