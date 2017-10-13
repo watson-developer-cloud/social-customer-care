@@ -1,19 +1,34 @@
 declared-services:
+  Plus1Think-cloudantNoSQLDB:
+    label: cloudantNoSQLDB
+    plan: lite
   natural-language-classifier-service:
     label: natural_language_classifier
     plan: standard
   personality-insights-service:
     label: personality_insights
-    plan: tiered
-  tone-analyzer-standard:
+    plan: lite
+  tone-analyzer-service:
     label: tone_analyzer
-    plan: standard
+    plan: lite
+  natural-language-understanding-service:
+    label: natural-language-understanding
+    plan: free
 applications:
 - services:
+   - Plus1Think-cloudantNoSQLDB
    - natural-language-classifier-service
    - personality-insights-service
    - tone-analyzer-service
-  name: social-customer-care
+   - natural-language-understanding-service
+  name: Plus1Think
   command: npm start
   path: .
   memory: 512M
+  instances: 1
+  buildpack: sdk-for-nodejs
+  domain: mybluemix.net
+  host: Plus1Think
+  disk_quota: 1024M
+  cf_stacks:
+     - cflinuxfs2

@@ -1,0 +1,95 @@
+{
+  "services": {
+    "natural-language-understanding": [
+      {
+        "credentials": {
+          "url": "https://gateway.watsonplatform.net/natural-language-understanding/api",
+          "username": "USERNAME",
+          "password": "PASSWORD"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": [],
+        "label": "natural-language-understanding",
+        "provider": null,
+        "plan": "free",
+        "name": "natural-language-understanding-service",
+        "tags": [
+          "watson",
+          "ibm_created",
+          "ibm_dedicated_public",
+          "lite"
+        ]
+      }
+    ],
+    "tone_analyzer": [
+      {
+        "credentials": {
+          "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+          "username": "USERNAME",
+          "password": "PASSWORD"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": [],
+        "label": "tone_analyzer",
+        "provider": null,
+        "plan": "lite",
+        "name": "tone-analyzer-service",
+        "tags": [
+          "watson",
+          "ibm_created",
+          "ibm_dedicated_public",
+          "lite"
+        ]
+      }
+    ],
+    "personality_insights": [
+      {
+        "credentials": {
+          "url": "https://gateway.watsonplatform.net/personality-insights/api",
+          "username": "USERNAME",
+          "password": "PASSWORD"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": [],
+        "label": "personality_insights",
+        "provider": null,
+        "plan": "lite",
+        "name": "personality-insights-service",
+        "tags": [
+          "watson",
+          "ibm_created",
+          "ibm_dedicated_public",
+          "lite"
+        ]
+      }
+    ],
+    "natural_language_classifier": [
+      {
+        "credentials": {
+          "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+          "username": "USERNAME",
+          "password": "PASSWORD"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": [],
+        "label": "natural_language_classifier",
+        "provider": null,
+        "plan": "standard",
+        "name": "natural-language-classifier-service",
+        "tags": [
+          "watson",
+          "ibm_created",
+          "ibm_dedicated_public"
+        ]
+      }
+    ]
+  },
+  "twitter": [
+    {
+      "consumer_key": "consumer_key",
+      "consumer_secret": "consumer_secret",
+      "access_token_key": "access_token_key",
+      "access_token_secret": "access_token_secret"
+    }
+  ]
+}

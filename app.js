@@ -19,8 +19,12 @@
 var app = require('express')();
 var profileByUser = {};
 
-var watson = require('watson-developer-cloud');
-var personalityInsights = watson.personality_insights({ version: 'v2' });
+var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
+var personality_insights = new PersonalityInsightsV3({
+    username: '{username}',
+    password: '{password}',
+    version_date: '2016-10-19'
+});
 var processProfile = require('./util/process-personality-profile');
 
 // Bootstrap application settings
@@ -50,7 +54,7 @@ app.get('/api/profile', function(req, res, next) {
     if (error) {
       return next(next);
     }
-    personalityInsights.profile({ contentItems:tweets }, function (perror, profile) {
+    personality_insights.profile({ contentItems:tweets }, function (perror, profile) {
       if (error) {
         return next(perror);
       }
