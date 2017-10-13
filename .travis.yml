@@ -22,7 +22,7 @@ deploy:
     - bx-blue-green-travis
   on:
     branch: master
-    repo: watson-developer-cloud/visual-recognition-nodejs
+    repo: watson-developer-cloud/social-customer-care
   skip_cleanup: true
 notifications:
   email: false
