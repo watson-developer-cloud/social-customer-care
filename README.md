@@ -1,4 +1,4 @@
-# <%= bluemix.name -%> [![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
+# Social Customer Care [![Build Status](https://travis-ci.org/watson-developer-cloud/social-customer-care.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/social-customer-care)
 
 This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Natural Language Understanding][natural-language-understanding], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
 
@@ -27,7 +27,6 @@ TWITTER_ACCESS_TOKEN_SECRET=REPLACE WITH YOUR ACCESS TOKEN SECRET
 
 ### Run locally as Node.js application
 
-
 ```sh
 npm install
 npm run build
@@ -44,14 +43,8 @@ bx dev run
 ### Deploy to Bluemix as CloudFoundry application
 
 ```sh
-cf push
+bx cf push
 ```
-
-### Deploy to Bluemix automatically
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy)
-
-[![Create Toolchain](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/)
 
 ### Directory structure
 
@@ -71,7 +64,6 @@ cf push
 │   └── twitter-helper.js
 └── views                                    // Views
 ```
-
 
 ## About this pattern
 
@@ -117,10 +109,9 @@ The following links provide more information about the Natural Language Classifi
 * [API reference](http://www.ibm.com/watson/developercloud/personality-insights/api/v3/): SDK code examples and reference
 * [API explorerer](https://watson-api-explorer.mybluemix.net/apis/personality-insights-v2): Try out the REST API
 
-
 ## License
 
-  This sample code is licensed under Apache 2.0.
+MIT.
 
 [natural-language-understanding]: http://www.ibm.com/watson/developercloud/natural-language-understanding.html
 [natural-language-classifier]: http://www.ibm.com/watson/developercloud/nl-classifier.html

@@ -1,19 +1,13 @@
 ---
 applications:
-- disk_quota: 1024M
-<% if (bluemix && bluemix.name) { -%>
-  name: <%= bluemix.name %>
-<% } -%>
-<% if (bluemix && bluemix.server && bluemix.server.domain) { -%>
-  domain: <%= bluemix.server.domain %>
-<% } -%>
-<% if (bluemix && bluemix.server && bluemix.server.host) { -%>
-  host: <%= bluemix.server.host %>
-<% } else { -%>
-  random-route: true
-<% } -%>
-  memory: 384M
+- services:
+   - natural-language-classifier-service
+   - personality-insights-service
+   - tone-analyzer-service
+  name: social-customer-care
+  command: npm start
+  path: .
+  memory: 512M
   instances: 1
   timeout: 180
   buildpack: sdk-for-nodejs
-  command: npm start

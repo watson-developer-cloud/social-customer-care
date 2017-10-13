@@ -1,0 +1,28 @@
+language: node_js
+dist: trusty
+sudo: required
+node_js: 6
+script:
+- npm run build
+- npm run lint
+
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - BX_APP=social-customer-care
+  - BX_API=https://api.ng.bluemix.net
+  - BX_ORGANIZATION=WatsonPlatformServices
+  - BX_SPACE=appgallery
+before_deploy: npm install -g https://github.com/andresfvilla/bx-blue-green
+deploy:
+  provider: script
+  script:
+    - bx-blue-green-travis
+  on:
+    branch: master
+    repo: watson-developer-cloud/visual-recognition-nodejs
+  skip_cleanup: true
+notifications:
+  email: false

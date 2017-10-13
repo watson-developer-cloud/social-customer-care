@@ -1,4 +1,3 @@
-
 var debug = require('debug')('scc:socket');
 var backoff = require('backoff');
 var processTweet = require('./util/process-tweet');
@@ -10,7 +9,7 @@ module.exports = function(io, twitter) {
   var sessions = {};
 
   var connectTwitter = function() {
-    twitter.stream({ track: topic, filter_level: 'low', language: 'en' }, function(stream) {
+    twitter.stream({ track: topic, filter_level: 'medium', language: 'en' }, function(stream) {
       debug('Connected to twitter.stream, topic: %s', topic);
       stream.on('data', function(tweet) {
         fibonacciBackoff.reset();
