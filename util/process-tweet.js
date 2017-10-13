@@ -16,29 +16,19 @@
 
 var async = require('async');
 var extend = require('extend');
+var watson = require('watson-developer-cloud');
 
-var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
-var tone_analyzer = new ToneAnalyzerV3({
-    username: '<username>',
-    password: '<password>',
-    version_date: '2016-05-19'
-});
+var toneAnalyzer = watson.tone_analyzer({ version:'v3', version_date: '2016-05-19' });
 
-var NaturalLanguageClassifierV1 = require('watson-developer-cloud/natural-language-classifier/v1');
-var natural_language_classifier = new NaturalLanguageClassifierV1({
-    username: '<username>',
-    password: '<password>'
-});
+var classifier = watson.natural_language_classifier({ version: 'v1' });
 var classifier_id = process.env.CLASSIFIER_ID || '<classifier-id>';
 
-var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
-var nlu = new NaturalLanguageUnderstandingV1({
-    username: '<username>',
-    password: '<password>',
-    version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2017_02_27
+var alchemyLanguage = watson.alchemy_language({
+  version: 'v1',
+  api_key: process.env.ALCHEMY_API_KEY || '<api-key>'
 });
-var features = ['concepts', 'entities', 'keywords', 'categories',
-    'emotion', 'relations', 'sentiment', 'semantic_roles'].join(',');
+var features = ['concepts', 'entities', 'keywords', 'taxonomy',
+                'doc-emotion', 'relations', 'doc-sentiment', 'typed-rels'].join(',');
 
 var responses = require('../data/default-responses');
 
@@ -60,9 +50,9 @@ function cleanText(text) {
  */
 function createProcessors(text) {
   return [
-    natural_language_classifier.classify.bind(natural_language_classifier, { text: text, classifier_id: classifier_id }),
-    nlu.combined.bind(nlu, { text: text, extract: features }),
-    tone_analyzer.tone.bind(tone_analyzer, { text: text })
+    classifier.classify.bind(classifier, { text: text, classifier_id: classifier_id }),
+    alchemyLanguage.combined.bind(alchemyLanguage, { text: text, extract: features }),
+    toneAnalyzer.tone.bind(toneAnalyzer, { text: text })
   ];
 }
 
@@ -108,16 +98,16 @@ module.exports = function processTweet(tweet, callback) {
 
       var result = {
         tweet: tweet,
-        nlu: response[1],
+        alchemy_language: response[1],
         tone_analyzer: response[2][0],
-        natural_language_classifier: extend({ classes: classes }, response[0][0].classes[0]),
+        classifier: extend({ classes: classes }, response[0][0].classes[0]),
         response: {
           text: responses[intent],
           name: 'Watson',
           screen_name: 'WatsonSupport'
         }
       };
-      result.sentiment = getSentiment(result.nlu.Sentiment);
+      result.sentiment = getSentiment(result.alchemy_language.docSentiment);
       callback(null, result);
     }
   });

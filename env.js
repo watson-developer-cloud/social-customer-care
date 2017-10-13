@@ -1,12 +1,5 @@
 module.exports = {
   VCAP_SERVICES: JSON.stringify({
-   cloudant: [{
-     credentials: {
-       url: 'https://mykey:mypassword@myaccount.cloudant.com',
-       account: 'MYKEY',
-       password: 'PASSWORD'
-     }
-   }],
    natural_language_classifier: [{
      credentials: {
        url: 'https://gateway.watsonplatform.net/natural-language-classifier/api',
