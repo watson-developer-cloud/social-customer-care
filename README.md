@@ -1,8 +1,6 @@
 # Social Customer Care [![Build Status](https://travis-ci.org/watson-developer-cloud/social-customer-care.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/social-customer-care)
 
-This application is a Starter Kit (SK) that is designed to get you up and running quickly with a common industry pattern, and to provide information and best practices around Watson services. This application was created to demonstrate how the [Natural Language Classifier][natural-language-classifier] can be used to direct customer requests and queries to the appropriate agent or workflow. Additionally, [Natural Language Understanding][natural-language-understanding], and [Personality Insights][personality-insights] demonstrate how to efficiently provide an agent with customer insights.
-
-You can see a version of this app that is already running [here](https://social-customer-care.mybluemix.net/).
+## DEPRECATED: this repo is no longer actively maintained. It can still be used as reference, but may contain outdated or unpatched code.
 
 ## Getting Started
 
